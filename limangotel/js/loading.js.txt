@@ -1,0 +1,33 @@
+function loadConfig() {
+	try {
+		errMessage = '';
+		initializeDivs();
+		initializeDB(); 						// Create Database & Tables if not exists and initialize
+		resetHeight();
+		// user's preferences.
+		// If the application is launching very first time then we need to redirect user to Add Location screen else in Main Screen
+		// Here if user is having 'My Location' true or having city at least 1 city then we should redirect them to Main Screen else Add Location Screen
+	} catch (ex) {
+		alert('Loading configuration failed... : Error Code : 107 ');
+		errMessage = errMessage + "\n " + ex;
+	}
+	showErrorsToDev();
+}
+
+//On Orientation Change
+window.onorientationchange = function() {
+	if (divMain.offsetHeight < screen.height) {
+		divMain.style.height = screen.height + 'px';
+	}
+};
+
+//Reset the height of screen on load of the application.
+function resetHeight() {
+	try {
+		if (divMain.offsetHeight < screen.height) {
+			divMain.style.height = screen.height + "px";
+		}
+	} catch (ex) {
+		errMessage = errMessage + "\n resetHeight() : " + ex;
+	}
+}
