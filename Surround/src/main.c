@@ -52,7 +52,7 @@ typedef struct box_t {
 
 static box* boxes;
 static GLfloat vertices[8];
-
+static char touch_count = 0;
 #define MAX_BOXES 20
 
 static float gravity_x, gravity_y;
@@ -140,6 +140,8 @@ void add_cube(float x, float y, int cube_to_add) {
 	boxes[cube_to_add].size = 40.0 + 20.0 * ((float) rand()) / RAND_MAX;
 	boxes[cube_to_add].visible = 1;
 
+	touch_count++;
+
 }
 
 void move_cube(float x, float y, int box_id) {
@@ -149,6 +151,8 @@ void move_cube(float x, float y, int box_id) {
 
 void remove_cube(int cube_to_remove) {
 	boxes[cube_to_remove].visible = 0;
+
+	touch_count--;
 }
 
 void render() {
@@ -172,6 +176,29 @@ void render() {
 
 			glPopMatrix();
 		}
+	}
+
+	if (touch_count == 3) {
+		GLfloat _vertices[] = {
+			(boxes[0].x + boxes[0].size/2), (boxes[0].y + boxes[0].size/2),
+			(boxes[1].x + boxes[1].size/2), (boxes[1].y + boxes[1].size/2),
+			(boxes[2].x + boxes[2].size/2), (boxes[2].y + boxes[2].size/2)
+		};
+
+		GLfloat _colors[] = {
+			0.0f,	0.0f,	0.0f,	1.0f,
+			0.0f,	0.0f,	0.0f,	1.0f,
+			0.0f,	0.0f,	0.0f,	1.0f
+		};
+
+		glVertexPointer(2, GL_FLOAT, 0, _vertices);
+		glColorPointer(4, GL_FLOAT, 0, _colors);
+
+	    glPushMatrix();
+	    glDrawArrays(GL_TRIANGLES, 0 , 3);
+	    glPopMatrix();
+
+
 	}
 
 	glDisableClientState(GL_VERTEX_ARRAY);
