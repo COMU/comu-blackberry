@@ -178,12 +178,17 @@ void render() {
 		}
 	}
 
-	if (touch_count == 3) {
-		GLfloat _vertices[] = {
-			(boxes[0].x + boxes[0].size/2), (boxes[0].y + boxes[0].size/2),
-			(boxes[1].x + boxes[1].size/2), (boxes[1].y + boxes[1].size/2),
-			(boxes[2].x + boxes[2].size/2), (boxes[2].y + boxes[2].size/2)
-		};
+	if (touch_count == 3) {							//atleast 3 point to draw a polygon
+		// get which boxes to draw
+		GLfloat _vertices[6];
+		int i=0, j=0;
+		for(i=0;i<MAX_BOXES;i++) {
+			if(boxes[i].visible == 1) {
+				_vertices[j] = (boxes[i].x + boxes[i].size/2);
+				_vertices[j+1] = (boxes[i].y + boxes[i].size/2);
+				j= j+2;
+			}
+		}
 
 		GLfloat _colors[] = {
 			0.0f,	0.0f,	0.0f,	1.0f,
@@ -199,6 +204,27 @@ void render() {
 	    glPopMatrix();
 
 
+	} else if(touch_count == 4) {
+		GLfloat _vertices[] = {
+			(boxes[0].x + boxes[0].size/2), (boxes[0].y + boxes[0].size/2),	(boxes[1].x + boxes[1].size/2), (boxes[1].y + boxes[1].size/2), (boxes[2].x + boxes[2].size/2), (boxes[2].y + boxes[2].size/2),
+			(boxes[1].x + boxes[1].size/2), (boxes[1].y + boxes[1].size/2), (boxes[2].x + boxes[2].size/2), (boxes[2].y + boxes[2].size/2),	(boxes[3].x + boxes[3].size/2), (boxes[3].y + boxes[3].size/2)
+		};
+
+		GLfloat _colors[] = {
+			0.0f,	0.0f,	0.0f,	1.0f,
+			0.0f,	0.0f,	0.0f,	1.0f,
+			0.0f,	0.0f,	0.0f,	1.0f,
+			1.0f,	1.0f,	0.0f,	1.0f,
+			1.0f,	1.0f,	0.0f,	1.0f,
+			1.0f,	1.0f,	0.0f,	1.0f
+		};
+
+		glVertexPointer(2, GL_FLOAT, 0, _vertices);
+		glColorPointer(4, GL_FLOAT, 0, _colors);
+
+	    glPushMatrix();
+	    glDrawArrays(GL_TRIANGLES, 0 , 6);
+	    glPopMatrix();
 	}
 
 	glDisableClientState(GL_VERTEX_ARRAY);
