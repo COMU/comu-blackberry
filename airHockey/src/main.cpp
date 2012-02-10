@@ -68,14 +68,28 @@ public:
 
 	float centerx() {return x + MALLETSIZE / 2; }
 	float centery() {return y + MALLETSIZE / 2; }
-	void move() { x += speed_x; y += speed_y;}
+	void move();
 	void calculateCollision(Mallet mallet);
 };
 
+void Puck::move() {
+	if ( speed_x > 30.0f)
+			speed_x = 30.0f;
+	if ( speed_y > 30.0f)
+			speed_y = 30.0f;
+	if ( speed_x < -30.0f)
+			speed_x = -30.0f;
+	if ( speed_y <  -30.0f)
+			speed_y = -30.0f;
+	 x += speed_x;
+	 y += speed_y;
+
+}
 static Mallet mallet1, mallet2;
 static Puck puck;							//TODO a new class for puck is needed.
 
 static GLfloat vertices[8];
+void move_puck();
 
 int init_blocks() {
 	EGLint surface_width, surface_height;
@@ -141,6 +155,10 @@ int init_blocks() {
 
 void clear_score() {
 	//TODO this must be filled
+	puck.x = 512;
+	puck.y = 256;
+	puck.speed_x = 10;
+	puck.speed_y = 10;
 }
 
 void Mallet::move(float coord_x, float coord_y) {
@@ -148,6 +166,8 @@ void Mallet::move(float coord_x, float coord_y) {
 	speed_y = y - coord_y;
 	x = coord_x;
 	y = height - coord_y;
+
+	move_puck();
 }
 
 void Puck::calculateCollision(Mallet mallet) {
@@ -186,11 +206,12 @@ void move_puck() {
 	if (puck.y >= (600 - MALLETSIZE))
 		puck.speed_y = -puck.speed_y;
 
-	if(pow(fabs(mallet1.centerx() - puck.centerx()),2) + pow(fabs(mallet1.centery() - puck.centery()),2) < pow(collade_distance,2)) {		//collision
+	if((pow(fabs(mallet1.centerx() - puck.centerx()),2) + pow(fabs(mallet1.centery() - puck.centery()),2)) <= pow(collade_distance,2)) {		//collision
+
 		puck.calculateCollision(mallet1);
 	}
 
-	if(pow(fabs(mallet2.centerx() - puck.centerx()),2) + pow(fabs(mallet2.centery() - puck.centery()),2) < pow(collade_distance,2)) {		//collision
+	if((pow(fabs(mallet2.centerx() - puck.centerx()),2) + pow(fabs(mallet2.centery() - puck.centery()),2)) <= pow(collade_distance,2)) {		//collision
 		puck.calculateCollision(mallet2);
 	}
 
