@@ -43,22 +43,37 @@ static screen_context_t screen_cxt;
 static float width, height, max_size;
 
 float MALLETSIZE = 80.0f;
-class mallet{
+float PUCKSIZE = 60.0f;
+class Mallet{
 public:
 	float x;
 	float y;
+
+	float speed_x;
+	float speed_y;
 	GLfloat color;
 	void move(float coor_x, float coor_y);
 	float centerx() {return x + MALLETSIZE / 2; }
 	float centery() {return y + MALLETSIZE / 2; }
 };
 
-class List {
+class Puck {
+public:
+	float x;
+	float y;
+	float speed_x;
+	float speed_y;
 
+	Puck() { speed_x = 10; speed_y = 10; }
+
+	float centerx() {return x + MALLETSIZE / 2; }
+	float centery() {return y + MALLETSIZE / 2; }
+	void move() { x += speed_x; y += speed_y;}
+	void calculateCollision(Mallet mallet);
 };
 
-static mallet mallet1, mallet2;
-static mallet puck;							//TODO a new class for puck is needed.
+static Mallet mallet1, mallet2;
+static Puck puck;							//TODO a new class for puck is needed.
 
 static GLfloat vertices[8];
 
@@ -128,80 +143,59 @@ void clear_score() {
 	//TODO this must be filled
 }
 
-void mallet::move(float coord_x, float coord_y) {
+void Mallet::move(float coord_x, float coord_y) {
+	speed_x = x - coord_x;
+	speed_y = y - coord_y;
 	x = coord_x;
 	y = height - coord_y;
 }
+
+void Puck::calculateCollision(Mallet mallet) {
+	//calculate the line that collition created
+	// mx+n = y is the formula we are trying to get.
+	float m = ((mallet.y - y)/(mallet.x - x));
+	float n = mallet.y - (m * mallet.x);
+
+	//now get the pivot using right angled line.
+	float n2 = (y - speed_y) + (m * (x - speed_x));	// + m since we need to reverse the tilt.
+
+	float pivot_x = (n2 - n) / (2*m);
+	float pivot_y = m * pivot_x + n;
+
+	//now just get the mirror from the pivot point;
+	float new_x = 2 * pivot_x - (x - speed_x);
+	float new_y = 2 * pivot_y - (y - speed_y);
+	//we know where the puck should go, calculate speed accordingly
+
+	speed_x = new_x - x;
+	speed_y = new_y - y;
+}
+
 void move_puck() {
 	/*
 	 * 4 ways for start. center is x + size/2, y + size/2
 	 */
-	float MOVE_SIZE = 3.0f;
-	float COLLIDE_DISTANCE = 80;
 
-	/*
-	if(abs(mallet1.x - puck.x) < COLLIDE_DISTANCE)	{		//collision with mallet1 in x axis
-		if(mallet1.x > puck.x)			//detect direction
-			puck.move(puck.x - MOVE_SIZE, puck.y);
-		else
-			puck.move(puck.x + MOVE_SIZE, puck.y);
-		fprintf(stderr, "move vertical by 1: mallet at %f,%f. puck at %f,%f \n", mallet1.x, mallet1.y, puck.x, puck.y);
+	float collade_distance = (PUCKSIZE + MALLETSIZE) / 2;
+	if(puck.x <= 0)
+		puck.speed_x = -puck.speed_x;
+	if(puck.y <= 0)
+		puck.speed_y = -puck.speed_y;
+	if (puck.x >= (1024 - MALLETSIZE))
+		puck.speed_x = -puck.speed_x;
+	if (puck.y >= (600 - MALLETSIZE))
+		puck.speed_y = -puck.speed_y;
 
+	if(pow(fabs(mallet1.centerx() - puck.centerx()),2) + pow(fabs(mallet1.centery() - puck.centery()),2) < pow(collade_distance,2)) {		//collision
+		puck.calculateCollision(mallet1);
 	}
-	if(abs(mallet1.y - puck.y) < COLLIDE_DISTANCE)	{		//collision with mallet1 in y axis
-		if(mallet1.y > puck.y)			//detect direction
-			puck.move(puck.x, puck.y - MOVE_SIZE);
-		else
-			puck.move(puck.x, puck.y + MOVE_SIZE);
-		fprintf(stderr, "move horizonal by 1: mallet at %f,%f. puck at %f,%f \n", mallet1.x, mallet1.y, puck.x, puck.y);
-	}
-	if(abs(mallet2.x - puck.x) < COLLIDE_DISTANCE)	{		//collision with mallet1 in x axis
-		if(mallet2.x > puck.x)			//detect direction
-			puck.move(puck.x - MOVE_SIZE, puck.y);
-		else
-			puck.move(puck.x + MOVE_SIZE , puck.y);
-		fprintf(stderr, "move vertical by 2: mallet at %f,%f. puck at %f,%f \n", mallet2.x, mallet2.y, puck.x, puck.y);
 
-	}
-	if(abs(mallet2.y - puck.y) < COLLIDE_DISTANCE)	{		//collision with mallet1 in y axis
-		if(mallet2.y > puck.y)			//detect direction
-			puck.move(puck.x, puck.y - MOVE_SIZE);
-		else
-			puck.move(puck.x, puck.y + MOVE_SIZE);
-		fprintf(stderr, "move horizonal by 2: mallet at %f,%f. puck at %f,%f \n", mallet2.x, mallet2.y, puck.x, puck.y);
-	}
-*/
-	//distance between puck and mallet1 :
-
-	if(pow(fabs(mallet1.x - puck.x),2) + pow(fabs(mallet1.y - puck.y),2) < pow(COLLIDE_DISTANCE,2)) {		//collision
-		if(mallet1.x > puck.x)			//detect direction
-			puck.move(puck.x - MOVE_SIZE, puck.y);
-		else
-			puck.move(puck.x + MOVE_SIZE, puck.y);
-		if(mallet1.y > puck.y)			//detect direction
-			puck.move(puck.x, puck.y + MOVE_SIZE);
-		else
-			puck.move(puck.x, puck.y - MOVE_SIZE);
+	if(pow(fabs(mallet2.centerx() - puck.centerx()),2) + pow(fabs(mallet2.centery() - puck.centery()),2) < pow(collade_distance,2)) {		//collision
+		puck.calculateCollision(mallet2);
 	}
 
 
-	if(pow(fabs(mallet2.x - puck.x),2) + pow(fabs(mallet2.y - puck.y),2) < pow(COLLIDE_DISTANCE,2)) {		//collision
-		if(mallet2.x > puck.x)			//detect direction
-			puck.move(puck.x - MOVE_SIZE, puck.y);
-		else
-			puck.move(puck.x + MOVE_SIZE, puck.y);
-		if(mallet2.y > puck.y)			//detect direction
-			puck.move(puck.x, puck.y - MOVE_SIZE);
-		else
-			puck.move(puck.x, puck.y + MOVE_SIZE);
-	}
-
-	if (puck.x < 0 || puck.x > 500)
-		puck.x = 256;
-	if (puck.y < 0 || puck.y > 1000)
-			puck.y = 512;
-
-
+	puck.move();		//move according to speed settings
 
 	/*
 	 *	fprintf(stderr,"mallet1 position %f %f,\t", mallet1.x, mallet1.y);
@@ -242,9 +236,9 @@ void render() {
 	/* draw third mallet */
 	glPushMatrix();
 
-	glColor4f(puck.color, 0.78f, 0, 1.0f);
+	//glColor4f(puck.color, 0.78f, 0, 1.0f);
 	glTranslatef(puck.x, puck.y, 0.0f);
-	glScalef(MALLETSIZE, MALLETSIZE, 1.0f);
+	glScalef(PUCKSIZE, PUCKSIZE, 1.0f);
 
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
