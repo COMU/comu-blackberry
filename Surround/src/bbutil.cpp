@@ -463,7 +463,8 @@ font_t* bbutil_load_font(const char* path, int point_size, int dpi) {
 }
 
 void bbutil_render_text(font_t* font, const char* msg, float x, float y) {
-    int i, c;
+    int c;
+    uint i;
     GLfloat *vertices;
     GLfloat *texture_coords;
     GLshort* indices;
@@ -592,7 +593,8 @@ void bbutil_destroy_font(font_t* font) {
 }
 
 void bbutil_measure_text(font_t* font, const char* msg, float* width, float* height) {
-    int i, c;
+    int c;
+    uint i;
 
     if (!msg) {
         return;
@@ -623,7 +625,7 @@ void bbutil_measure_text(font_t* font, const char* msg, float* width, float* hei
 }
 
 int bbutil_load_texture(const char* filename, int* width, int* height, float* tex_x, float* tex_y, unsigned int *tex) {
-    int i;
+    uint i;
     GLuint format;
     //header for testing if it is a png
     png_byte header[8];
