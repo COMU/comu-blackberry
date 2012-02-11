@@ -28,11 +28,14 @@ Mallet::Mallet(float x, float y,float size, GLfloat color) {
 }
 
 void Mallet::move(float coord_x, float coord_y) {
-	speed_x = x - coord_x;
-	speed_y = y - (height - coord_y);
 
-	x = coord_x;
-	y = height - coord_y;
+	//the parameter x and y is touch coordinates, our x and y defines left bottom corner.
+	//to fix this, we will subtract size
+	speed_x = x - (coord_x - size);
+	speed_y = y - (height - coord_y - size) ;
+
+	x = coord_x - size;
+	y = height - coord_y - size;
 }
 
 void Puck::move() {
