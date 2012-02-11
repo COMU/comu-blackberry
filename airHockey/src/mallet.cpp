@@ -27,13 +27,14 @@ Mallet::Mallet(float x, float y,float size, GLfloat color) {
 	speed_y = 0;
 }
 
-void Mallet::move(float coord_x, float coord_y) {
+void Mallet::move(float coord_x, float coord_y, Mallet puck) {
 
 	//the parameter x and y is touch coordinates, our x and y defines left bottom corner.
 	//to fix this, we will subtract size
 	speed_x = x - (coord_x - size);
 	speed_y = y - (height - coord_y - size) ;
 
+	searchCollition(puck);
 	x = coord_x - size;
 	y = height - coord_y - size;
 }
@@ -92,6 +93,20 @@ void Mallet::searchCollition(Mallet mallet) {
 		//calculate distance that will be taken in this loop
 		float distance_to_go_sqr = pow(speed_x,2) + pow(speed_y,2);
 		if(distance_to_go_sqr + distance_after_collide_sqr > distance_to_pivot_sqr) {		//collition before next loop
+
+
+			//since we calculate mallet move while mallet2 is not moving,
+			//mallet always hits mallet2 with the same line of its speed.
+			//so we need to move puck out of line and add mallets speed to mallet2.
+
+			//calculate new speed for mallet2
+
+			float new_speed_x = mallet.speed_x + speed_x;
+			float new_speed_y = mallet.speed_y + speed_y;
+
+			//TODOmove it minimum possible distance in the line of its speed.
+
+			mallet.move();
 
 			/*
 			//calculate exact speed needed to collide at next loop

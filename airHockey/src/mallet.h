@@ -23,8 +23,10 @@ public:
 
 	Mallet(float x, float y,float size, GLfloat color);
 	Mallet();
-	void move(float coor_x, float coor_y);
+	void move(float coor_x, float coor_y, Mallet mallet);
+	void move() { x =+ speed_x; y =+ speed_y; }
 	void searchCollition(Mallet mallet);
+
 	float centerx() {return x + size; }
 	float centery() {return y + size; }
 };

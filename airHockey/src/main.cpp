@@ -224,9 +224,9 @@ static void handleScreenEvent(bps_event_t *event) {
 	if (screen_val == SCREEN_EVENT_MTOUCH_TOUCH || screen_val == SCREEN_EVENT_MTOUCH_MOVE) {
 		//This is touch screen event.
 		if(pair[0] < 1024/2)						//left half of the area, player
-			mallet1.move(pair[0], pair[1]);
+			mallet1.move(pair[0], pair[1], puck);
 		else
-			mallet2.move(pair[0], pair[1]);
+			mallet2.move(pair[0], pair[1], puck);
 	} else if (screen_val == SCREEN_EVENT_POINTER) {
 		//This is a mouse move event, it is applicable to a device with a usb mouse or simulator
 		screen_get_event_property_iv(screen_event, SCREEN_PROPERTY_BUTTONS,
