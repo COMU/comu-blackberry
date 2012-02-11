@@ -165,7 +165,8 @@ void clear_score() {
 
 void Mallet::move(float coord_x, float coord_y) {
 	speed_x = x - coord_x;
-	speed_y = y - coord_y;
+	speed_y = y - (height - coord_y);
+
 	x = coord_x;
 	y = height - coord_y;
 }
@@ -531,8 +532,8 @@ int main(int argc, char **argv) {
 
 		//search collition
 
-		puck.searchCollition(mallet1);
-		puck.searchCollition(mallet2);
+		//puck.searchCollition(mallet1);
+		//puck.searchCollition(mallet2);
 		//Update puck positions
 		move_puck();
 
