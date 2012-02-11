@@ -12,6 +12,11 @@
 
 extern float height;
 
+Mallet::Mallet() {
+	this->x = 512;
+	this->y = 256;
+}
+
 Mallet::Mallet(float x, float y,float size, GLfloat color) {
 	this->x = x;
 	this->y = y;

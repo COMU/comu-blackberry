@@ -47,19 +47,12 @@ float width, height;
 float MALLETSIZE = 40.0f;
 float PUCKSIZE = 30.0f;
 
-class Puck {
+class Puck : public Mallet {
 public:
-	float x;
-	float y;
-	float speed_x;
-	float speed_y;
-
 	float speed_vector_from_collition_sqr;
 
-	Puck() { speed_x = 10; speed_y = 10; speed_vector_from_collition_sqr = 0;}
+	Puck() { size = PUCKSIZE; speed_x = 10; speed_y = 10; speed_vector_from_collition_sqr = 0;}
 
-	float centerx() {return x + PUCKSIZE / 2; }
-	float centery() {return y + PUCKSIZE / 2; }
 	void move();
 	void searchCollition(Mallet mallet);
 	void calculateSpeedAfterCollision(Mallet mallet);
@@ -134,8 +127,6 @@ int init_blocks() {
 	glClearColor(0.0f, 0.25f, 0.0f, 1.0f);
 
 	//initialise the puck
-	puck.x = 512;
-	puck.y = 256;
 
 	return EXIT_SUCCESS;
 }

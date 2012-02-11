@@ -22,6 +22,7 @@ public:
 	GLfloat color;
 
 	Mallet(float x, float y,float size, GLfloat color);
+	Mallet();
 	void move(float coor_x, float coor_y);
 	float centerx() {return x + size; }
 	float centery() {return y + size; }
