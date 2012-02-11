@@ -36,26 +36,16 @@
 
 #include "bbutil.h"
 #include "input/screen_helpers.h"
+#include "mallet.h"
 
 static bool shutdown;
 static int orientation_angle;
 static screen_context_t screen_cxt;
-static float width, height, max_size;
+static float max_size;
+float width, height;
 
 float MALLETSIZE = 40.0f;
 float PUCKSIZE = 30.0f;
-class Mallet{
-public:
-	float x;
-	float y;
-
-	float speed_x;
-	float speed_y;
-	GLfloat color;
-	void move(float coor_x, float coor_y);
-	float centerx() {return x + MALLETSIZE / 2; }
-	float centery() {return y + MALLETSIZE / 2; }
-};
 
 class Puck {
 public:
@@ -88,7 +78,7 @@ void Puck::move() {
 	 y += speed_y;
 
 }
-static Mallet mallet1, mallet2;
+static Mallet mallet1(100, 256, MALLETSIZE, 0), mallet2(800, 256, MALLETSIZE, 0);
 static Puck puck;
 
 static GLfloat vertices[8];
@@ -144,12 +134,6 @@ int init_blocks() {
 	glClearColor(0.0f, 0.25f, 0.0f, 1.0f);
 
 	//initialise mallets and the puck
-	mallet1.x = 100;
-	mallet1.y = 256;
-
-	mallet2.x = 800;
-	mallet2.y = 256;
-
 	puck.x = 512;
 	puck.y = 256;
 
@@ -161,14 +145,6 @@ void clear_score() {
 	puck.y = 256;
 	puck.speed_x = 10;
 	puck.speed_y = 10;
-}
-
-void Mallet::move(float coord_x, float coord_y) {
-	speed_x = x - coord_x;
-	speed_y = y - (height - coord_y);
-
-	x = coord_x;
-	y = height - coord_y;
 }
 
 void Puck::searchCollition(Mallet mallet) {
