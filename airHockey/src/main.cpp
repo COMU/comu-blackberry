@@ -64,12 +64,15 @@ public:
 	float speed_x;
 	float speed_y;
 
-	Puck() { speed_x = 10; speed_y = 10; }
+	float speed_vector_from_collition_sqr;
+
+	Puck() { speed_x = 10; speed_y = 10; speed_vector_from_collition_sqr = 0;}
 
 	float centerx() {return x + MALLETSIZE / 2; }
 	float centery() {return y + MALLETSIZE / 2; }
 	void move();
-	void calculateCollision(Mallet mallet);
+	void searchCollition(Mallet mallet);
+	void calculateSpeedAfterCollision(Mallet mallet);
 };
 
 void Puck::move() {
@@ -86,7 +89,7 @@ void Puck::move() {
 
 }
 static Mallet mallet1, mallet2;
-static Puck puck;							//TODO a new class for puck is needed.
+static Puck puck;
 
 static GLfloat vertices[8];
 void move_puck();
@@ -154,7 +157,6 @@ int init_blocks() {
 }
 
 void clear_score() {
-	//TODO this must be filled
 	puck.x = 512;
 	puck.y = 256;
 	puck.speed_x = 10;
@@ -166,11 +168,67 @@ void Mallet::move(float coord_x, float coord_y) {
 	speed_y = y - coord_y;
 	x = coord_x;
 	y = height - coord_y;
-
-	move_puck();
 }
 
-void Puck::calculateCollision(Mallet mallet) {
+void Puck::searchCollition(Mallet mallet) {
+	//calculate the line that puck moves
+	//the formula for line is mx+n=y
+
+	float m = speed_x / speed_y;
+	float n = centery() - m * centerx();
+
+	//now we have a line starts from center of puck
+	//calculate a line with right angle to first one from mallet
+
+	float n2 = mallet.centery() + m * mallet.centerx();
+
+	//calculate pivot point:
+
+	float pivot_x = (n2 - n) / (2*m);
+	float pivot_y = m * pivot_x + n;
+
+	//now look is the mallet close enough to collide
+	float pivot_lenght_sqr = (pow(abs(mallet.centerx()-pivot_x),2) + pow(abs(mallet.centery()-pivot_y),2));
+	float collide_distance_sqr = pow((PUCKSIZE + MALLETSIZE),2);
+	if (pivot_lenght_sqr < collide_distance_sqr) {
+		//collision is possible, look if it will be before next loop:
+
+		//in which point the collition will happen?
+		//calculating the triangle, mallet base, pivot point and collition point.
+		float distance_after_collide_sqr = collide_distance_sqr - pivot_lenght_sqr;
+
+		//calculate distance between puck and pivot
+		float distance_to_pivot_sqr = pow((abs(pivot_x - centerx())),2) + pow((abs(pivot_y - centery())),2);
+		//calculate distance that will be taken in this loop
+		float distance_to_go_sqr = pow(speed_x,2) + pow(speed_y,2);
+		if(distance_to_go_sqr + distance_after_collide_sqr > distance_to_pivot_sqr) {		//collition before next loop
+			//calculate exact speed needed to collide at next loop
+
+			float distance_to_past_sqr = distance_to_pivot_sqr - distance_after_collide_sqr;
+
+			//the speed needed can be calculated as this:
+			// x2 + m2x2 = Hypotenuse2, means (m2+1)x2 = distance_to_past_sqr
+
+			float new_speedx_sqr = distance_to_past_sqr / (pow(m,2)+1);
+			float new_speedy_sqr = new_speedx_sqr * pow(m,2);
+
+			//change the speed values to new ones
+
+			speed_x = sqrt(new_speedx_sqr) + 1;			//
+			speed_y = sqrt(new_speedy_sqr) + 1;			// +1 to be sure, floats might cause troubles.
+
+			//deposit the difference to speed_vector_from_collition_sqr
+
+			speed_vector_from_collition_sqr = distance_after_collide_sqr;
+
+			fprintf(stderr, "collition ahead");
+		}
+
+
+	}
+
+}
+void Puck::calculateSpeedAfterCollision(Mallet mallet) {		//this function assumes x and y is centered. fix this
 	//calculate the line that collition created
 	// mx+n = y is the formula we are trying to get.
 	float m = ((mallet.y - y)/(mallet.x - x));
@@ -208,11 +266,11 @@ void move_puck() {
 
 	if((pow(fabs(mallet1.centerx() - puck.centerx()),2) + pow(fabs(mallet1.centery() - puck.centery()),2)) <= pow(collade_distance,2)) {		//collision
 
-		puck.calculateCollision(mallet1);
+		puck.calculateSpeedAfterCollision(mallet1);
 	}
 
 	if((pow(fabs(mallet2.centerx() - puck.centerx()),2) + pow(fabs(mallet2.centery() - puck.centery()),2)) <= pow(collade_distance,2)) {		//collision
-		puck.calculateCollision(mallet2);
+		puck.calculateSpeedAfterCollision(mallet2);
 	}
 
 
@@ -471,6 +529,10 @@ int main(int argc, char **argv) {
 		// Handle user input and sensors
 		handle_events();
 
+		//search collition
+
+		puck.searchCollition(mallet1);
+		puck.searchCollition(mallet2);
 		//Update puck positions
 		move_puck();
 
