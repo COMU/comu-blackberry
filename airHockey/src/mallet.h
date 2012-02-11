@@ -24,6 +24,7 @@ public:
 	Mallet(float x, float y,float size, GLfloat color);
 	Mallet();
 	void move(float coor_x, float coor_y);
+	void searchCollition(Mallet mallet);
 	float centerx() {return x + size; }
 	float centery() {return y + size; }
 };
@@ -38,7 +39,7 @@ public:
 	Puck(float size, float speed_x, float speed_y);
 
 	void move();
-	void searchCollition(Mallet mallet);
+
 	void calculateSpeedAfterCollision(Mallet mallet);
 };
 
