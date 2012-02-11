@@ -124,15 +124,23 @@ void move_puck() {
 	 */
 
 	float collade_distance = (PUCKSIZE + MALLETSIZE) / 2;
-	if(puck.x <= 0)
+	if(puck.x < 0) {
+		puck.x = 0;
 		puck.speed_x = -puck.speed_x;
-	if(puck.y <= 0)
+	}
+	if(puck.y < 0) {
+		puck.y = 0;
 		puck.speed_y = -puck.speed_y;
-	if (puck.x >= (1024 - MALLETSIZE))
+	}
+	if (puck.x > (1024 - PUCKSIZE)) {
+		puck.x = 1024 - PUCKSIZE;
 		puck.speed_x = -puck.speed_x;
-	if (puck.y >= (600 - MALLETSIZE))
+	}
+	if (puck.y > (600 - PUCKSIZE)) {
+		puck.y = 600 - PUCKSIZE;
 		puck.speed_y = -puck.speed_y;
-
+	}
+/*
 	if((pow(fabs(mallet1.centerx() - puck.centerx()),2) + pow(fabs(mallet1.centery() - puck.centery()),2)) <= pow(collade_distance,2)) {		//collision
 
 		puck.calculateSpeedAfterCollision(mallet1);
@@ -142,7 +150,7 @@ void move_puck() {
 		puck.calculateSpeedAfterCollision(mallet2);
 	}
 
-
+*/
 	puck.move();		//move according to speed settings
 
 	/*
@@ -218,7 +226,7 @@ static void handleScreenEvent(bps_event_t *event) {
 	return_error = screen_get_mtouch_event(screen_event, &mtouch_event, 0);
 
 	if (return_error)
-		fprintf(stderr, "Error: failed to get mtouch event\n");
+		; //fprintf(stderr, "Error: failed to get mtouch event\n");
 
 	//There is a difference between touch screen events and mouse events
 	if (screen_val == SCREEN_EVENT_MTOUCH_TOUCH || screen_val == SCREEN_EVENT_MTOUCH_MOVE) {

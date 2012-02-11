@@ -27,14 +27,15 @@ Mallet::Mallet(float x, float y,float size, GLfloat color) {
 	speed_y = 0;
 }
 
-void Mallet::move(float coord_x, float coord_y, Mallet puck) {
+void Mallet::move(float coord_x, float coord_y, Mallet &puck) {
 
 	//the parameter x and y is touch coordinates, our x and y defines left bottom corner.
 	//to fix this, we will subtract size
-	speed_x = x - (coord_x - size);
-	speed_y = y - (height - coord_y - size) ;
+	speed_x = (coord_x - size) - x;
+	speed_y = (height - coord_y - size) - y ;
 
-	searchCollition(puck);
+	searchCollition(&puck);
+
 	x = coord_x - size;
 	y = height - coord_y - size;
 }
@@ -47,21 +48,32 @@ Puck::Puck(float size, float speed_x, float speed_y) {
 }
 
 void Puck::move() {
-	if ( speed_x > 30.0f)
-			speed_x = 30.0f;
-	if ( speed_y > 30.0f)
-			speed_y = 30.0f;
-	if ( speed_x < -30.0f)
-			speed_x = -30.0f;
-	if ( speed_y <  -30.0f)
-			speed_y = -30.0f;
+
+	float MAXSPEED = 10.0F;
+	if(speed_x > MAXSPEED) {
+		speed_x = MAXSPEED;
+		fprintf(stderr, "change speed_x, it is now : %f", speed_x);
+	}
+	if(speed_x < -1 *MAXSPEED) {
+		speed_x = -1 * MAXSPEED;
+		fprintf(stderr, "change speed_x, it is now : %f", speed_x);
+	}
+	if(speed_y >  MAXSPEED) {
+		speed_y = MAXSPEED;
+		fprintf(stderr, "change speed_y, it is now : %f", speed_y);
+	}
+	if(speed_y < -1 * MAXSPEED) {
+		speed_y = -1 * MAXSPEED;
+		fprintf(stderr, "change speed_y, it is now : %f", speed_y);
+	}
+
 	 x += speed_x;
 	 y += speed_y;
-
 }
 
 
-void Mallet::searchCollition(Mallet mallet) {
+void Mallet::searchCollition(Mallet *mallet) {
+
 	//calculate the line that puck moves
 	//the formula for line is mx+n=y
 
@@ -71,7 +83,7 @@ void Mallet::searchCollition(Mallet mallet) {
 	//now we have a line starts from center of our mallet
 	//calculate a line with right angle to first one from mallet2
 
-	float n2 = mallet.centery() + m * mallet.centerx();
+	float n2 = mallet->centery() + m * mallet->centerx();
 
 	//calculate pivot point:
 
@@ -79,8 +91,8 @@ void Mallet::searchCollition(Mallet mallet) {
 	float pivot_y = m * pivot_x + n;
 
 	//now look is the mallet2 close enough to collide
-	float pivot_lenght_sqr = (pow(abs(mallet.centerx()-pivot_x),2) + pow(abs(mallet.centery()-pivot_y),2));
-	float collide_distance_sqr = pow((this->size + mallet.size),2);
+	float pivot_lenght_sqr = (pow(abs(mallet->centerx()-pivot_x),2) + pow(abs(mallet->centery()-pivot_y),2));
+	float collide_distance_sqr = pow((this->size + mallet->size),2);
 	if (pivot_lenght_sqr < collide_distance_sqr) {
 		//collision is possible, look if it will be before next loop:
 
@@ -94,20 +106,27 @@ void Mallet::searchCollition(Mallet mallet) {
 		float distance_to_go_sqr = pow(speed_x,2) + pow(speed_y,2);
 		if(distance_to_go_sqr + distance_after_collide_sqr > distance_to_pivot_sqr) {		//collition before next loop
 
-
+			mallet->color = 1.0f;
 			//since we calculate mallet move while mallet2 is not moving,
 			//mallet always hits mallet2 with the same line of its speed.
 			//so we need to move puck out of line and add mallets speed to mallet2.
 
 			//calculate new speed for mallet2
+			float new_speed_x = mallet->speed_x + speed_x;
+			float new_speed_y = mallet->speed_y + speed_y;
 
-			float new_speed_x = mallet.speed_x + speed_x;
-			float new_speed_y = mallet.speed_y + speed_y;
+			//TODO move it minimum possible distance in the line of its speed.
+			// I will copy the move code to here just for quick testing
 
-			//TODOmove it minimum possible distance in the line of its speed.
+			mallet->speed_x = new_speed_x;
+			mallet->speed_y = new_speed_y;
 
-			mallet.move();
+			mallet->x += speed_x;
+			mallet->y += speed_y;
 
+
+
+			//end of copy code and todo
 			/*
 			//calculate exact speed needed to collide at next loop
 
@@ -131,6 +150,8 @@ void Mallet::searchCollition(Mallet mallet) {
 			fprintf(stderr, "collition ahead");
 			*/
 		}
+		else
+			mallet->color = 0.0f;
 
 
 	}

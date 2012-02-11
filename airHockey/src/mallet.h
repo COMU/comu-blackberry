@@ -10,6 +10,7 @@
 
 #include <EGL/egl.h>
 #include <GLES/gl.h>
+#include <stdio.h>
 
 class Mallet{
 public:
@@ -23,10 +24,9 @@ public:
 
 	Mallet(float x, float y,float size, GLfloat color);
 	Mallet();
-	void move(float coor_x, float coor_y, Mallet mallet);
-	void move() { x =+ speed_x; y =+ speed_y; }
-	void searchCollition(Mallet mallet);
-
+	void move(float coor_x, float coor_y, Mallet &mallet);
+	void searchCollition(Mallet *mallet);
+	void printSpeed() { fprintf(stderr, "speed = ( %f , %f )\n", speed_x, speed_y);}
 	float centerx() {return x + size; }
 	float centery() {return y + size; }
 };
