@@ -122,22 +122,22 @@ void Puck::searchCollition(Mallet mallet) {
 void Puck::calculateSpeedAfterCollision(Mallet mallet) {		//this function assumes x and y is centered. fix this
 	//calculate the line that collition created
 	// mx+n = y is the formula we are trying to get.
-	float m = ((mallet.y - y)/(mallet.x - x));
-	float n = mallet.y - (m * mallet.x);
+	float m = ((mallet.centery() - centery())/(mallet.centerx() - centerx()));
+	float n = mallet.centery() - (m * mallet.centerx());
 
 	//now get the pivot using right angled line.
-	float n2 = (y - speed_y) + (m * (x - speed_x));	// + m since we need to reverse the tilt.
+	float n2 = (centery() - speed_y) + (m * (centerx() - speed_x));	// + m since we need to reverse the tilt.
 
 	float pivot_x = (n2 - n) / (2*m);
 	float pivot_y = m * pivot_x + n;
 
 	//now just get the mirror from the pivot point;
-	float new_x = 2 * pivot_x - (x - speed_x);
-	float new_y = 2 * pivot_y - (y - speed_y);
+	float new_x = 2 * pivot_x - (centerx() - speed_x);
+	float new_y = 2 * pivot_y - (centery() - speed_y);
 	//we know where the puck should go, calculate speed accordingly
 
-	speed_x = new_x - x;
-	speed_y = new_y - y;
+	speed_x = new_x - centerx();
+	speed_y = new_y - centery();
 }
 
 
