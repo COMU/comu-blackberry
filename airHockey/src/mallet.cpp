@@ -38,6 +38,13 @@ void Mallet::move(float coord_x, float coord_y) {
 	y = height - coord_y - size;
 }
 
+Puck::Puck(float size, float speed_x, float speed_y) {
+	this->size = size;
+	this->speed_x = speed_x;
+	this->speed_y = speed_y;
+	speed_vector_from_collition_sqr = 0;
+}
+
 void Puck::move() {
 	if ( speed_x > 30.0f)
 			speed_x = 30.0f;

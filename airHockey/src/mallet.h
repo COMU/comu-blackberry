@@ -32,7 +32,7 @@ class Puck : public Mallet {
 public:
 	float speed_vector_from_collition_sqr;
 
-	Puck(float size, float speed_x, float speed_y) { this->size = size; this->speed_x = speed_x; this->speed_y = speed_y; speed_vector_from_collition_sqr = 0;}
+	Puck(float size, float speed_x, float speed_y); { this->size = size; this->speed_x = speed_x; this->speed_y = speed_y; speed_vector_from_collition_sqr = 0;}
 
 	void move();
 	void searchCollition(Mallet mallet);
