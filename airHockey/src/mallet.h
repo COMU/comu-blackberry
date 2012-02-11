@@ -21,14 +21,7 @@ public:
 	float speed_y;
 	GLfloat color;
 
-	Mallet(float x, float y,float size, GLfloat color) {
-		this->x = x;
-		this->y = y;
-		this->color = color;
-		this->size = size;
-		speed_x = 0;
-		speed_y = 0;
-	}
+	Mallet(float x, float y,float size, GLfloat color);
 	void move(float coor_x, float coor_y);
 	float centerx() {return x + size; }
 	float centery() {return y + size; }
