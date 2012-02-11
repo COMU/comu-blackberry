@@ -58,8 +58,8 @@ public:
 
 	Puck() { speed_x = 10; speed_y = 10; speed_vector_from_collition_sqr = 0;}
 
-	float centerx() {return x + MALLETSIZE / 2; }
-	float centery() {return y + MALLETSIZE / 2; }
+	float centerx() {return x + PUCKSIZE / 2; }
+	float centery() {return y + PUCKSIZE / 2; }
 	void move();
 	void searchCollition(Mallet mallet);
 	void calculateSpeedAfterCollision(Mallet mallet);
@@ -133,7 +133,7 @@ int init_blocks() {
 	//Set clear color to a shade of green for good looks
 	glClearColor(0.0f, 0.25f, 0.0f, 1.0f);
 
-	//initialise mallets and the puck
+	//initialise the puck
 	puck.x = 512;
 	puck.y = 256;
 
