@@ -42,8 +42,8 @@ static int orientation_angle;
 static screen_context_t screen_cxt;
 static float width, height, max_size;
 
-float MALLETSIZE = 80.0f;
-float PUCKSIZE = 60.0f;
+float MALLETSIZE = 40.0f;
+float PUCKSIZE = 30.0f;
 class Mallet{
 public:
 	float x;
@@ -296,7 +296,7 @@ void render() {
 
 	glColor4f(mallet1.color, 0.78f, 0, 1.0f);
 	glTranslatef(mallet1.x, mallet1.y, 0.0f);
-	glScalef(MALLETSIZE, MALLETSIZE, 1.0f);
+	glScalef(MALLETSIZE*2, MALLETSIZE*2, 1.0f);
 
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
@@ -307,7 +307,7 @@ void render() {
 
 	glColor4f(mallet2.color, 0.78f, 0, 1.0f);
 	glTranslatef(mallet2.x, mallet2.y, 0.0f);
-	glScalef(MALLETSIZE, MALLETSIZE, 1.0f);
+	glScalef(MALLETSIZE*2, MALLETSIZE*2, 1.0f);
 
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
@@ -318,7 +318,7 @@ void render() {
 
 	//glColor4f(puck.color, 0.78f, 0, 1.0f);
 	glTranslatef(puck.x, puck.y, 0.0f);
-	glScalef(PUCKSIZE, PUCKSIZE, 1.0f);
+	glScalef(PUCKSIZE*2, PUCKSIZE*2, 1.0f);
 
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
