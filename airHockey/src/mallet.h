@@ -17,6 +17,7 @@ public:
 	float x;
 	float y;
 	float size;											//this is radious, will be rendered as pi*size^2 or in this case 2*size
+	char isMallet;
 
 	float speed_x;
 	float speed_y;

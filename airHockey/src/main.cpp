@@ -151,6 +151,8 @@ void move_puck() {
 	}
 
 */
+	puck.searchCollition(&mallet1);
+	puck.searchCollition(&mallet2);
 	puck.move();		//move according to speed settings
 
 	/*
