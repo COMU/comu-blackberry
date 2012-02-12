@@ -49,7 +49,7 @@ Puck::Puck(float size, float speed_x, float speed_y) {
 
 void Puck::move() {
 
-	float MAXSPEED = 10.0F;
+	float MAXSPEED = 40.0F;
 	if(speed_x > MAXSPEED) {
 		speed_x = MAXSPEED;
 		fprintf(stderr, "change speed_x, it is now : %f", speed_x);
@@ -115,18 +115,15 @@ void Mallet::searchCollition(Mallet *mallet) {
 			float new_speed_x = mallet->speed_x + speed_x;
 			float new_speed_y = mallet->speed_y + speed_y;
 
-			//TODO move it minimum possible distance in the line of its speed.
-			// I will copy the move code to here just for quick testing
+			while((pow(centerx()-mallet->centerx(),2) + pow(centery() - mallet->centery(),2)) < pow(mallet->size + size,2)) {
+				//since the parameter we take is Mallet, accessing Puck.move practically impossible, so here is a little copy code.
+				mallet->speed_x = new_speed_x;
+				mallet->speed_y = new_speed_y;
 
-			mallet->speed_x = new_speed_x;
-			mallet->speed_y = new_speed_y;
+				mallet->x += speed_x;
+				mallet->y += speed_y;
+			}
 
-			mallet->x += speed_x;
-			mallet->y += speed_y;
-
-
-
-			//end of copy code and todo
 			/*
 			//calculate exact speed needed to collide at next loop
 
