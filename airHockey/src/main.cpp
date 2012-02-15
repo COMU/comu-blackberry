@@ -123,7 +123,9 @@ void move_puck() {
 	 * 4 ways for start. center is x + size/2, y + size/2
 	 */
 
-	float collade_distance = (PUCKSIZE + MALLETSIZE) / 2;
+	//puck.searchCollition(&mallet1);
+	//puck.searchCollition(&mallet2);
+
 	if(puck.x < 0) {
 		puck.x = 0;
 		puck.speed_x = -puck.speed_x;
@@ -151,9 +153,8 @@ void move_puck() {
 	}
 
 */
-	puck.searchCollition(&mallet1);
-	puck.searchCollition(&mallet2);
-	puck.move();		//move according to speed settings
+
+	puck.move(mallet1, mallet2);		//move according to speed settings
 
 	/*
 	 *	fprintf(stderr,"mallet1 position %f %f,\t", mallet1.x, mallet1.y);

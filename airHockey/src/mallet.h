@@ -41,9 +41,7 @@ public:
 
 	Puck(float size, float speed_x, float speed_y);
 
-	void move();
-
-	void calculateSpeedAfterCollision(Mallet mallet);
+	void move(Mallet &mallet1, Mallet &mallet2);
 };
 
 

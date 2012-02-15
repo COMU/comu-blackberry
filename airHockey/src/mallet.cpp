@@ -50,24 +50,23 @@ Puck::Puck(float size, float speed_x, float speed_y) {
 	this->isMallet = 0;
 }
 
-void Puck::move() {
+void Puck::move(Mallet &mallet1, Mallet &mallet2) {
+
+	searchCollition(&mallet1);
+	searchCollition(&mallet2);
 
 	float MAXSPEED = 10.0F;
 	if(speed_x > MAXSPEED) {
 		speed_x = MAXSPEED;
-		fprintf(stderr, "change speed_x, it is now : %f", speed_x);
 	}
 	if(speed_x < -1 *MAXSPEED) {
 		speed_x = -1 * MAXSPEED;
-		fprintf(stderr, "change speed_x, it is now : %f", speed_x);
 	}
 	if(speed_y >  MAXSPEED) {
 		speed_y = MAXSPEED;
-		fprintf(stderr, "change speed_y, it is now : %f", speed_y);
 	}
 	if(speed_y < -1 * MAXSPEED) {
 		speed_y = -1 * MAXSPEED;
-		fprintf(stderr, "change speed_y, it is now : %f", speed_y);
 	}
 
 	 x += speed_x;
@@ -95,8 +94,8 @@ void Mallet::searchCollition(Mallet *mallet) {
 	float pivot_y = m * pivot_x + n;
 
 	//now look is the mallet2 close enough to collide
-	float pivot_lenght_sqr = (pow(abs(mallet->centerx()-pivot_x),2) + pow(abs(mallet->centery()-pivot_y),2));
-	float collide_distance_sqr = pow((this->size + mallet->size),2);
+	float pivot_lenght_sqr = (pow(mallet->centerx()-pivot_x,2) + pow(mallet->centery()-pivot_y,2));
+	float collide_distance_sqr = pow((size + mallet->size),2);
 	if (pivot_lenght_sqr < collide_distance_sqr) {
 		//collision is possible, look if it will be before next loop:
 
@@ -105,14 +104,13 @@ void Mallet::searchCollition(Mallet *mallet) {
 		float distance_after_collide_sqr = collide_distance_sqr - pivot_lenght_sqr;
 
 		//calculate distance between puck and pivot
-		float distance_to_pivot_sqr = pow((abs(pivot_x - centerx())),2) + pow((abs(pivot_y - centery())),2);
+		float distance_to_pivot_sqr = pow(pivot_x - centerx(),2) + pow(pivot_y - centery(),2);
 		//calculate distance that will be taken in this loop
 		float distance_to_go_sqr = pow(speed_x,2) + pow(speed_y,2);
-		if(distance_to_go_sqr + distance_after_collide_sqr >= distance_to_pivot_sqr) {		//collition before next loop
-
+		if(distance_to_go_sqr >= distance_to_pivot_sqr - distance_after_collide_sqr) {		//collition before next loop
+			fprintf(stderr, "there will be a collition with ");
 			if(isMallet == 1) {
-
-				mallet->color = 1.0f;
+				fprintf(stderr, "mallet\n" );
 				//since we calculate mallet move while puck is not moving,
 				//mallet always hits puck with the same line of its speed.
 
@@ -148,9 +146,42 @@ void Mallet::searchCollition(Mallet *mallet) {
 				}
 
 			} else {
+				//puck collition part
 
-				//since we calculate puck move while mallet is not moving,
-				//puck always hits mallet with the same line of its speed.
+				fprintf(stderr, "puck\n");
+/*
+				while((pow(centerx() - mallet->centerx(),2) + pow(centery() - mallet->centery(),2)) > pow(mallet->size + size,2)) {
+					if ( speed_x > 0){
+						x += 1;
+						if ( m > 0)
+							y += m;
+						else
+							y -= m;
+					} else {
+						x -= 1;
+						if ( m > 0)
+							y -= m;
+						else
+							y += m;
+					}
+				}
+*/
+/*
+				//calculate in which coordinates the puck will hit the mallet
+				float vector_to_new_location_sqr = distance_to_pivot_sqr - distance_after_collide_sqr;
+
+				float new_center_x_coordinate = sqrt(vector_to_new_location_sqr / (pow(m,2) + 1));
+				float new_center_y_coordinate = m * new_center_x_coordinate + n;
+
+				//move the puck to the collition position:
+//				x = x + new_center_x_coordinate;
+//				y = y + new_center_y_coordinate;
+ *
+ */
+				//now calculate m again with for collition line
+
+				m = (mallet->centery() - (centery())) / ( mallet->centerx() - (centerx()));
+
 
 				//get reflection of speed_x and speed_y to the collition line
 				float n_for_speed = speed_y + m * speed_x;		//+m since we are calculating a pivot point.
@@ -161,10 +192,12 @@ void Mallet::searchCollition(Mallet *mallet) {
 				speed_x = speed_x - 2 *(speed_x - pivot_x_for_speed);
 				speed_y = speed_y - 2 *(speed_y - pivot_y_for_speed);
 
-
-
 				speed_x = - speed_x;
 				speed_y = - speed_y;
+
+
+
+
 
 			}
 
@@ -192,33 +225,7 @@ void Mallet::searchCollition(Mallet *mallet) {
 
 			}*/
 		}
-		else
-			mallet->color = 0.0f;
-
 
 	}
 
 }
-
-void Puck::calculateSpeedAfterCollision(Mallet mallet) {		//this function assumes x and y is centered. fix this
-	//calculate the line that collition created
-	// mx+n = y is the formula we are trying to get.
-	float m = ((mallet.centery() - centery())/(mallet.centerx() - centerx()));
-	float n = mallet.centery() - (m * mallet.centerx());
-
-	//now get the pivot using right angled line.
-	float n2 = (centery() - speed_y) + (m * (centerx() - speed_x));	// + m since we need to reverse the tilt.
-
-	float pivot_x = (n2 - n) / (2*m);
-	float pivot_y = m * pivot_x + n;
-
-	//now just get the mirror from the pivot point;
-	float new_x = 2 * pivot_x - (centerx() - speed_x);
-	float new_y = 2 * pivot_y - (centery() - speed_y);
-	//we know where the puck should go, calculate speed accordingly
-
-	speed_x = new_x - centerx();
-	speed_y = new_y - centery();
-}
-
-
