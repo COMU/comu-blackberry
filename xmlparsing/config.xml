@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:rim="http://www.blackberry.com/ns/widgets" version="1.0.0.0">
+  <name>xml parse etme</name>
+  <description>BlackBerry için yazdýðýmýz ilk uygulama</description>
+  <author>Fatmagül Ergani</author>
+  <icon src="icon.png"/>
+  <content src="index.html"/>
+  <feature id="blackberry.app"/>
+</widget>

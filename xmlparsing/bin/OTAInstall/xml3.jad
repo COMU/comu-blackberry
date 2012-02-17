@@ -1,0 +1,38 @@
+RIM-COD-SHA1-4: 72 c1 85 5b 86 12 b0 ef 4a b1 25 6b 1f b7 f6 cf a6 bb 06 e8
+RIM-COD-SHA1-3: bb 15 4f 46 3a 80 6a 75 dc 4e 15 dc da f2 d5 2c ce 3e 22 62
+RIM-COD-SHA1-2: 24 73 ad 25 e7 b1 90 6e 6e f3 76 17 13 c4 ee 90 60 5e 47 63
+RIM-COD-SHA1-1: f6 4f 54 38 d1 62 a3 7a 22 53 d8 a3 76 99 17 a1 10 ca d2 f8
+RIM-MIDlet-Flags-1: 0
+MIDlet-Jar-Size: 452429
+MIDlet-Name: xml parse etme
+MIDlet-Jar-URL: xml3.jar
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-Description: BlackBerry için yazd???m?z ilk uygulama
+RIM-COD-URL-7: xml3-7.cod
+RIM-COD-Module-Dependencies: net_rim_cldc,net_rim_bb_web_jse_api,net_rim_xml_org,net_rim_bb_browser_field2_api,net_rim_os,net_rim_networkapi,net_rim_bb_browser_field_api,net_rim_bbapi_push,net_rim_bbapi_messagelist,net_rim_bbapi_browser,net_rim_xml
+RIM-COD-URL-6: xml3-6.cod
+RIM-COD-URL-5: xml3-5.cod
+RIM-COD-URL-4: xml3-4.cod
+RIM-COD-URL-3: xml3-3.cod
+RIM-COD-URL-2: xml3-2.cod
+RIM-COD-URL-1: xml3-1.cod
+RIM-COD-Size-7: 29772
+RIM-COD-Size-6: 56184
+RIM-COD-Size-5: 49820
+RIM-COD-Size-4: 49812
+RIM-COD-Size-3: 57188
+RIM-COD-Module-Name: xml3
+RIM-COD-Size-2: 43972
+RIM-COD-Size-1: 59724
+RIM-COD-SHA1: e8 e7 d2 40 0a 3e 13 62 38 b7 33 a9 5e 8f 4a c5 8c 88 e8 37
+RIM-COD-Size: 65876
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Vendor: Fatmagül Ergani
+MIDlet-1: xml parse etme,icon.png,rim:foreground;WIDGET;
+RIM-COD-URL: xml3.cod
+Manifest-Version: 1.0
+MIDlet-Version: 1.0.0.0
+RIM-COD-SHA1-7: 43 a3 dc 77 82 d9 99 64 00 17 14 a7 55 65 b1 cf 76 f5 e5 c0
+RIM-COD-Creation-Time: 1329512986
+RIM-COD-SHA1-6: fb 14 97 ed c5 46 66 8b 83 db 9b 57 e6 97 0c 5a c4 57 7f bd
+RIM-COD-SHA1-5: c5 0f 1a 21 f4 fa f0 c9 56 93 28 3f 98 8f 0a 3e 1b 75 3e 35
