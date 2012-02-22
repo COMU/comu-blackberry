@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+ 	
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<div id="content"></div>
+
+<script src="jquery.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+
+
+$(document).ready(function(){
+
+function parse(document){
+  $(document).find("book").each(function(){
+    $("#content").append(
+	'<p>ISBN10: '+$(this).attr('isbn10')+
+	'<br /> Title: '+$(this).find('title').text()+
+	'<br /> Author: '+$(this).find('author').text()+
+	'</p>'
+	);
+  });
+}
+
+  $.ajax({
+    url: 'books.xml', // name of file you want to parse
+    dataType: "xml",
+    success: parse,
+	error: function(){alert("Error: Something went wrong");}
+  });
+});
+</script>
+</head>
+</html>

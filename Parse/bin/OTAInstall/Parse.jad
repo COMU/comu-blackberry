@@ -1,0 +1,32 @@
+Manifest-Version: 1.0
+MIDlet-Version: 1.0.0.0
+MIDlet-Jar-Size: 423030
+RIM-COD-URL-5: Parse-5.cod
+RIM-COD-SHA1-5: 16 d3 29 4c be 74 24 96 2e df cf 55 59 40 90 f1 fa cd 6f 32
+RIM-COD-URL-4: Parse-4.cod
+RIM-COD-SHA1-4: 07 01 88 90 57 76 29 11 b8 80 41 3f 86 17 eb 6e fd 79 0a 12
+RIM-COD-URL-3: Parse-3.cod
+RIM-COD-SHA1-3: bb f1 52 bd 9d c4 bb d5 0d 2f 75 a4 91 45 4a 80 4d 46 96 2f
+RIM-COD-URL-2: Parse-2.cod
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-Jar-URL: Parse.jar
+RIM-COD-Module-Dependencies: net_rim_cldc,net_rim_bb_web_jse_api,net_rim_xml_org,net_rim_bb_browser_field2_api,net_rim_os,net_rim_networkapi,net_rim_bb_browser_field_api,net_rim_bbapi_push,net_rim_bbapi_messagelist,net_rim_xml,net_rim_bbapi_browser
+RIM-COD-Size-5: 50244
+RIM-COD-SHA1-2: 32 7c d5 7a 95 45 3f d1 b4 98 26 4a a3 d5 e5 d0 ef f2 03 8a
+RIM-COD-URL-1: Parse-1.cod
+RIM-COD-Size-4: 57684
+RIM-COD-SHA1-1: 2e 03 33 76 b5 eb b0 5a d5 da 68 07 af 83 2d 8b 9f 96 98 e6
+RIM-COD-Size-3: 51728
+RIM-COD-Size-2: 56808
+RIM-MIDlet-Flags-1: 0
+RIM-COD-Size-1: 63716
+RIM-COD-Module-Name: Parse
+MIDlet-Name: Merhaba BlackBerry
+RIM-COD-Size: 64780
+RIM-COD-Creation-Time: 1329849636
+MIDlet-1: Merhaba BlackBerry,icon.PNG,rim:foreground;WIDGET;
+RIM-COD-URL: Parse.cod
+MIDlet-Description: BlackBerry için yazd???m?z ilk uygulama
+RIM-COD-SHA1: 0e c3 ba 80 b5 87 88 b6 87 03 fa 67 b1 c7 a1 de 82 bd 92 08
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Vendor: Ozden Sayalan
