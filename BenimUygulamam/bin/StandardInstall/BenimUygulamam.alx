@@ -1,0 +1,12 @@
+<loader version="1.0" >
+<application id="BenimUygulamam">
+<name>Merhaba BlackBerry</name>
+<description>BlackBerry için yazdýðýmýz ilk uygulama</description>
+<version>1.0.0.0</version>
+<vendor>Ozden Sayalan</vendor>
+<fileset Java="1.45">
+<directory></directory>
+<files>BenimUygulamam.cod</files>
+</fileset>
+</application>
+</loader>

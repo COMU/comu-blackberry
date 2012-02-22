@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+MIDlet-Version: 1.0.0.0
+MIDlet-Jar-Size: 381997
+RIM-COD-URL-4: BenimUygulamam-4.cod
+RIM-COD-SHA1-4: f7 8b 42 f7 ee 65 5e 11 58 d9 58 9e a0 bc c7 22 3d 63 1d 81
+RIM-COD-URL-3: BenimUygulamam-3.cod
+RIM-COD-SHA1-3: 6c b2 a3 0b 03 8b 0a 12 62 1e 82 59 a5 ac 04 de 4f 78 bd f5
+RIM-COD-URL-2: BenimUygulamam-2.cod
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-Jar-URL: BenimUygulamam.jar
+RIM-COD-Module-Dependencies: net_rim_cldc,net_rim_bb_web_jse_api,net_rim_xml_org,net_rim_bb_browser_field2_api,net_rim_os,net_rim_networkapi,net_rim_bb_browser_field_api,net_rim_bbapi_push,net_rim_bbapi_messagelist,net_rim_xml,net_rim_bbapi_browser
+RIM-COD-SHA1-2: c4 74 f7 be e3 38 5d 5f 31 70 f2 24 e1 9f 86 39 b7 7e 0c d2
+RIM-COD-URL-1: BenimUygulamam-1.cod
+RIM-COD-Size-4: 50216
+RIM-COD-SHA1-1: cc 3a d5 7b a2 66 10 63 5a f5 de c0 ac d4 8d 26 39 d0 6c 83
+RIM-COD-Size-3: 50676
+RIM-COD-Size-2: 56860
+RIM-MIDlet-Flags-1: 0
+RIM-COD-Size-1: 63756
+RIM-COD-Module-Name: BenimUygulamam
+MIDlet-Name: Merhaba BlackBerry
+RIM-COD-Size: 64848
+RIM-COD-Creation-Time: 1329143804
+MIDlet-1: Merhaba BlackBerry,icon.png,rim:foreground;WIDGET;
+RIM-COD-URL: BenimUygulamam.cod
+MIDlet-Description: BlackBerry için yazdýðýmýz ilk uygulama
+RIM-COD-SHA1: 37 b7 08 33 7b 03 fb 8a dc 17 54 43 02 60 56 d0 91 ed c1 10
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Vendor: Ozden Sayalan
