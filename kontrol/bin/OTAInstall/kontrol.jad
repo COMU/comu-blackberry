@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+MIDlet-Version: 1.0.0.0
+MIDlet-Jar-Size: 386222
+RIM-COD-URL-4: kontrol-4.cod
+RIM-COD-SHA1-4: e7 0f c2 0a 91 18 d1 c2 35 47 bd 7e 79 db e9 7f 59 54 bc 19
+RIM-COD-URL-3: kontrol-3.cod
+RIM-COD-SHA1-3: 47 c5 46 b3 39 eb cd 5d 44 24 77 04 e4 07 cd 6e 57 c7 2c 85
+RIM-COD-URL-2: kontrol-2.cod
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-Jar-URL: kontrol.jar
+RIM-COD-Module-Dependencies: net_rim_cldc,net_rim_bb_web_jse_api,net_rim_xml_org,net_rim_bb_browser_field2_api,net_rim_os,net_rim_networkapi,net_rim_bb_browser_field_api,net_rim_bbapi_push,net_rim_bbapi_messagelist,net_rim_xml,net_rim_bbapi_browser
+RIM-COD-SHA1-2: b1 f4 53 f2 bc bd 7e 85 6d be f0 29 68 bb 4d 36 30 0d 84 04
+RIM-COD-URL-1: kontrol-1.cod
+RIM-COD-Size-4: 50176
+RIM-COD-SHA1-1: d8 46 01 c0 77 6e 90 eb b3 76 0d 1b 9d 4a b6 39 fe 60 39 31
+RIM-COD-Size-3: 52548
+RIM-COD-Size-2: 56812
+RIM-MIDlet-Flags-1: 0
+RIM-COD-Size-1: 66924
+RIM-COD-Module-Name: kontrol
+MIDlet-Name: Merhaba BlackBerry
+RIM-COD-Size: 62724
+RIM-COD-Creation-Time: 1329851508
+MIDlet-1: Merhaba BlackBerry,icon.png,rim:foreground;WIDGET;
+RIM-COD-URL: kontrol.cod
+MIDlet-Description: BlackBerry için yazd???m?z ilk uygulama
+RIM-COD-SHA1: 00 e8 fd f5 8a 66 76 76 65 de 77 41 c6 5c 60 62 c8 12 95 c2
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Vendor: Ozden Sayalan
