@@ -1,0 +1,48 @@
+<html>
+<head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script>
+function gonder(){
+	var xmlhttp;
+	if (window.XMLHttpRequest)
+		{// code for IE7+, Firefox, Chrome, Opera, Safari
+			alert("nesne oluþturuldu.");
+			xmlhttp=new XMLHttpRequest();
+		}
+	else
+		{// code for IE6, IE5
+			alert("nesne oluþturuldu.");
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange=function()
+		{
+			if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			{
+				//document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+				var response = xmlhttp.responseText;
+				alert(response);
+			}
+		}
+	console.log(location.hash);
+	alert(xmlhttp.status);
+	var clientID = "client_id=821909445886.apps.googleusercontent.com";
+	var redirectUri = "redirect_uri=https://localhost/oauth2callback&";
+	var scope = "scope=https://gdata.youtube.com&";
+	var response_type = "response_type=token&";
+	xmlhttp.open("POST", "https://accounts.google.com/o/oauth2/auth?" + scope + redirectUri + response_type + clientID, true);
+	xmlhttp.send();
+}
+</script>
+</head>
+<body>
+<form>
+<label><h3>ÜYE GÝRÝÞÝ</h3></label></br>
+<label>E-mail:</label>
+<input type="text" name="email" /><br><br>
+<label>Parola:</label>
+<input type="password" name="parola" /><br><br>
+<input type="button" value="Giris" onClick="gonder()" />
+<div id="myDiv"><h2></h2></div
+</form>
+</body>
+</html>
