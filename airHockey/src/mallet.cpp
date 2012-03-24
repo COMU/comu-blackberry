@@ -86,18 +86,19 @@ void Mallet::searchCollition(Mallet *mallet) {
 	//now we have a line starts from center of our mallet
 	//calculate a line with right angle to first one from mallet2
 
-	float n2 = mallet->centery() + m * mallet->centerx();
+	float m2 = -1 * speed_x / speed_y;
+	float n2 = mallet->centery() - m2 * mallet->centerx();
 
 	//calculate pivot point:
 
-	float pivot_x = (n2 - n) / (2*m);
+	float pivot_x = (n - n2) / (m2 - m);
 	float pivot_y = m * pivot_x + n;
 
 	//now look is the mallet2 close enough to collide
 	float pivot_lenght_sqr = (pow(mallet->centerx()-pivot_x,2) + pow(mallet->centery()-pivot_y,2));
 	float collide_distance_sqr = pow((size + mallet->size),2);
 	if (pivot_lenght_sqr < collide_distance_sqr) {
-		//collision is possible, look if it will be before next loop:
+		//collision is possible, look if it will be within this loop:
 
 		//in which point the collition will happen?
 		//calculating the triangle, mallet base, pivot point and collition point.
@@ -107,7 +108,7 @@ void Mallet::searchCollition(Mallet *mallet) {
 		float distance_to_pivot_sqr = pow(pivot_x - centerx(),2) + pow(pivot_y - centery(),2);
 		//calculate distance that will be taken in this loop
 		float distance_to_go_sqr = pow(speed_x,2) + pow(speed_y,2);
-		if(distance_to_go_sqr >= distance_to_pivot_sqr - distance_after_collide_sqr) {		//collition before next loop
+		if(distance_to_go_sqr >= distance_to_pivot_sqr - distance_after_collide_sqr) {		//collition in this loop
 			fprintf(stderr, "there will be a collition with ");
 			if(isMallet == 1) {
 				fprintf(stderr, "mallet\n" );
