@@ -86,12 +86,12 @@ void Mallet::searchCollition(Mallet *mallet) {
 	//now we have a line starts from center of our mallet
 	//calculate a line with right angle to first one from mallet2
 
-	float m2 = -1 * speed_x / speed_y;
-	float n2 = mallet->centery() - m2 * mallet->centerx();
+	float m_pivot = -1 * speed_x / speed_y;
+	float n_pivot = mallet->centery() - m_pivot * mallet->centerx();
 
 	//calculate pivot point:
 
-	float pivot_x = (n - n2) / (m2 - m);
+	float pivot_x = (n - n_pivot) / (m_pivot - m);
 	float pivot_y = m * pivot_x + n;
 
 	//now look is the mallet2 close enough to collide
@@ -106,9 +106,33 @@ void Mallet::searchCollition(Mallet *mallet) {
 
 		//calculate distance between puck and pivot
 		float distance_to_pivot_sqr = pow(pivot_x - centerx(),2) + pow(pivot_y - centery(),2);
+
 		//calculate distance that will be taken in this loop
 		float distance_to_go_sqr = pow(speed_x,2) + pow(speed_y,2);
-		if(distance_to_go_sqr >= distance_to_pivot_sqr - distance_after_collide_sqr) {		//collition in this loop
+		float distance_to_collide_sqr = distance_to_pivot_sqr - distance_after_collide_sqr;
+		if(distance_to_go_sqr >= distance_to_collide_sqr) {		//collition in this loop
+			//calculate collition line
+			float rate_of_move = sqrt(abs(distance_to_go_sqr / distance_to_collide_sqr));
+
+			float distance_x = rate_of_move * speed_x;
+			float distance_y = rate_of_move * speed_y;
+
+			float collition_x = centerx() + distance_x;
+			float collition_y = centery() + distance_y;
+
+			//TODO moving the mallet to the collition point at this stage might be useful.
+
+			this->x = collition_x - size;
+			this->y = collition_y - size;
+
+			//calculating m for collition line
+
+			float mc = (collition_y - mallet->centery()) / (collition_x - mallet->centerx());
+
+			float collide_angle_tan = tan((m - mc)/ (1 + m * mc));
+
+			//collide line slope and tanjent calculated
+
 			fprintf(stderr, "there will be a collition with ");
 			if(isMallet == 1) {
 				fprintf(stderr, "mallet\n" );
@@ -149,82 +173,79 @@ void Mallet::searchCollition(Mallet *mallet) {
 			} else {
 				//puck collition part
 
-				fprintf(stderr, "puck\n");
-/*
-				while((pow(centerx() - mallet->centerx(),2) + pow(centery() - mallet->centery(),2)) > pow(mallet->size + size,2)) {
-					if ( speed_x > 0){
-						x += 1;
-						if ( m > 0)
-							y += m;
-						else
-							y -= m;
-					} else {
-						x -= 1;
-						if ( m > 0)
-							y -= m;
-						else
-							y += m;
-					}
+				fprintf(stderr, "puck ");
+
+				//the collition angle is bigger than 45 degrees.
+
+				// we know the collition point, and move lines formula,
+				// we need to mirror the collition line from move line.
+
+				// to find new speed line, I will use center of mallet,
+				// since we already have the pivot line and pivot length.
+
+				//re use of variable distance_x/y.
+
+				distance_x = mallet->centerx() - pivot_x;
+				distance_y = mallet->centery() - pivot_y;
+
+				float new_x = collition_x - distance_x;
+				float new_y = collition_y - distance_y;
+
+				float new_m = (new_y - collition_y) / (new_x - collition_x);
+
+				//calculate new speed values
+				// speed_x^2 + speed_y^2 = (m * new_speed_x)^2 + new_speed_x^2
+
+				float new_speed_x = (new_m * new_m + 1)	/	distance_to_go_sqr;
+				new_speed_x = sqrt(abs(new_speed_x));
+				float new_speed_y = new_m * new_speed_x;
+
+				this->speed_x = new_speed_x;
+				this->speed_y = new_speed_y;
+
+				if(abs(collide_angle_tan) <= 1) {
+					fprintf(stderr, " with tan <= 1\n");
+					// the collition angle is smaller than 45 degrees.
+
+					// this means we need to mirror the speed on pivot too.
+
+					// find the distance of new speed to pivot line
+					// since the move line was already with the right angle,
+					// use its slope.
+
+					float n_new_speed = (collition_y + speed_y) - m * (collition_x + speed_x);
+
+					//find the intersection
+
+					float intersection_x = (n_new_speed - n_pivot) / (m_pivot - m);
+					float intersection_y = m * intersection_x + n_new_speed;
+
+					distance_x = collition_x + speed_x - intersection_x;
+					distance_y = collition_y + speed_y - intersection_y;
+
+					float new_x = collition_x - distance_x;
+					float new_y = collition_y - distance_y;
+
+					float new_m = (new_y - collition_y) / (new_x - collition_x);
+
+					float new_speed_x = (new_m * new_m + 1)	/	distance_to_go_sqr;
+					new_speed_x = sqrt(abs(new_speed_x));
+					float new_speed_y = new_m * new_speed_x;
+
+					this->speed_x = new_speed_x;
+					this->speed_y = new_speed_y;
+
+				} else {
+					fprintf(stderr, "\n");
 				}
-*/
-/*
-				//calculate in which coordinates the puck will hit the mallet
-				float vector_to_new_location_sqr = distance_to_pivot_sqr - distance_after_collide_sqr;
 
-				float new_center_x_coordinate = sqrt(vector_to_new_location_sqr / (pow(m,2) + 1));
-				float new_center_y_coordinate = m * new_center_x_coordinate + n;
-
-				//move the puck to the collition position:
-//				x = x + new_center_x_coordinate;
-//				y = y + new_center_y_coordinate;
- *
- */
-				//now calculate m again with for collition line
-
-				m = (mallet->centery() - (centery())) / ( mallet->centerx() - (centerx()));
-
-
-				//get reflection of speed_x and speed_y to the collition line
-				float n_for_speed = speed_y + m * speed_x;		//+m since we are calculating a pivot point.
-				float pivot_x_for_speed = n_for_speed / (2*m);
-				float pivot_y_for_speed = pivot_x_for_speed * m;
-
-				//calculate new speed values to the pivot:
-				speed_x = speed_x - 2 *(speed_x - pivot_x_for_speed);
-				speed_y = speed_y - 2 *(speed_y - pivot_y_for_speed);
-
-				speed_x = - speed_x;
-				speed_y = - speed_y;
-
-
-
-
+				rate_of_move = 1 - rate_of_move;
+				this->x = x + speed_x * rate_of_move;
+				this->y = y + speed_y * rate_of_move;
 
 			}
 
-			/* {
-			//calculate exact speed needed to collide at next loop
 
-			float distance_to_past_sqr = distance_to_pivot_sqr - distance_after_collide_sqr;
-
-			//the speed needed can be calculated as this:
-			// x2 + m2x2 = Hypotenuse2, means (m2+1)x2 = distance_to_past_sqr
-
-			float new_speedx_sqr = distance_to_past_sqr / (pow(m,2)+1);
-			float new_speedy_sqr = new_speedx_sqr * pow(m,2);
-
-			//change the speed values to new ones
-
-			speed_x = sqrt(new_speedx_sqr) + 1;			//
-			speed_y = sqrt(new_speedy_sqr) + 1;			// +1 to be sure, floats might cause troubles.
-
-			//deposit the difference to speed_vector_from_collition_sqr
-
-			speed_vector_from_collition_sqr = distance_after_collide_sqr;
-
-
-
-			}*/
 		}
 
 	}
