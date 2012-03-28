@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+<title>My Videos</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+<script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
+<script type="text/javascript">
+function loadVideo(playerUrl, autoplay) {
+    swfobject.embedSWF(
+        playerUrl + '&rel=1&border=0&fs=1&autoplay=' + 
+        (autoplay?1:0)+'&version=3', 'player', '585', '355', '9.0.0', false, 
+        false, {allowfullscreen: 'true'});
+		
+		<iframe width="100%" height="315" src="http://www.youtube.com/embed/'+id+'?autoplay=1" frameborder="0"></iframe>
+     
+}
+
+function showMyVideos(data) {
+    var feed = data.feed;
+    var entries = feed.entry || [];
+    var html = ['<ul class="videos">'];
+    for (var i = 0; i < entries.length; i++) {
+        var entry = entries[i];
+        var title = entry.title.$t.substr(0, 20);
+        var thumbnailUrl = entries[i].media$group.media$thumbnail[0].url;
+        var playerUrl = entries[i].media$group.media$content[0].url;
+        var videoId = playerUrl.substr(playerUrl.indexOf('v/')+2, 11);          
+        playerUrl = "http://www.youtube.com/v/" + videoId;  
+        html.push('<li onclick="loadVideo(\'', playerUrl, '\', true)">',
+                  '<img src="', 
+                  thumbnailUrl, '" width="94" height="58"/>', '</span></li>');
+    }
+    html.push('</ul>');
+    document.getElementById('videos').innerHTML = html.join('');
+    if (entries.length > 0) {
+        loadVideo(entries[0].media$group.media$content[0].url, false);
+    }
+}
+
+$(function(){
+      $.ajax({
+            type: "GET",
+            url: "http://gdata.youtube.com/feeds/api/standardfeeds/most_popular?time=today&alt=json-in-script&max-results=15&format=5",
+            cache: false,
+            dataType:'jsonp',
+            success: function(data){
+                showMyVideos(data);
+          },
+            error: function(XMLHttpRequest, textStatus, errorThrown, data){
+                alert("Not able to fetch the data due to feed unavailability!!!");
+            }
+        });
+})
+</script>
+
+
+<style>
+
+body{
+    background:#fff;
+    color:#c0c0c0;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:100%; 
+    line-height:1.125em;
+    }
+
+#videoContainer {
+    font-size:.75em;
+    overflow:hidden;
+    position:absolute;
+      left:0px;
+      top:0px;
+      margin-left:40px;
+      margin-top:5px;
+    }
+
+#playerContainer {
+
+    }
+
+
+object {
+
+  -moz-box-shadow: 5px 5px 5px #ccc;
+  -webkit-box-shadow: 5px 5px 5px #ccc;
+  box-shadow: 5px 5px 5px #ccc;
+}
+
+
+ul.videos {
+    list-style: none;
+    margin-bottom: 1em;
+    margin-left: 0em;
+    padding-left : 0em;
+
+    }
+    ul.videos li {
+        cursor: pointer;
+        display: inline;
+        margin-bottom: 1em;
+        padding-right: 28px;
+    }
+
+
+img {
+ -moz-box-shadow: 0px 0px 0px #ccc;
+  -webkit-box-shadow: 0px 0px 0px#ccc;
+  box-shadow: 0px 0px 0px #ccc;
+}
+
+img:hover {
+  -moz-box-shadow: 5px 5px 5px #ccc;
+  -webkit-box-shadow: 5px 5px 5px #ccc;
+  box-shadow: 5px 5px 5px #ccc;
+
+}
+
+
+</style>
+
+</head>
+<body>
+<div id="videoContainer">
+
+    <div id="playerContainer">
+        <div id="player"></div>
+
+        <div id="like"></div>
+        <div id="videos"></div>
+
+    </div>
+
+        </div>
+
+
+</body>
+</html>
