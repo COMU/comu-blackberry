@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+<title>My Videos</title>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+<script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
+
+<script type="text/javascript">
+function loadVideo(playerUrl, autoplay) {
+    swfobject.embedSWF(
+        playerUrl + '&rel=1&border=0&fs=1&autoplay=' + 
+        (autoplay?1:0)+'&version=3', 'player', '485', '300', '9.0.0', false, 
+        false, {allowfullscreen: 'true'});
+       
+}
+function showMyVideos(data) {
+    var feed = data.feed;
+    var entries = feed.entry || [];
+    var html = ['<ul class="videos">'];
+    for (var i = 0; i < entries.length; i++) {
+        var entry = entries[i];
+        var title = entry.title.$t.substr(0, 20);
+        var thumbnailUrl = entries[i].media$group.media$thumbnail[0].url;
+        var playerUrl = entries[i].media$group.media$content[0].url;
+        var videoId = playerUrl.substr(playerUrl.indexOf('v/')+2, 11);          
+        playerUrl = "http://www.youtube.com/v/" + videoId;  
+        html.push('<li onclick="loadVideo(\'', playerUrl, '\', true)">',
+                  '<div class="titlec">', title, '<br /></ div><div style="padding: 5px 0 0 0;"><img src="', thumbnailUrl, '" width="130" height="97"/></ div>', '</li>');    
+
+}
+    html.push('</ul>');
+    document.getElementById('videos').innerHTML = html.join('');
+    if (entries.length > 0) {
+        loadVideo(entries[0].media$group.media$content[0].url, false);
+    }
+}
+$(function(){
+      $.ajax({
+            type: "GET",
+            url: "http://gdata.youtube.com/feeds/api/standardfeeds/most_popular?time=today&alt=json-in-script&max-results=5&format=5",
+            cache: false,
+            dataType:'jsonp',
+            success: function(data){
+                showMyVideos(data);
+          },
+            error: function(XMLHttpRequest, textStatus, errorThrown, data){
+                alert("Not able to fetch the data due to feed unavailability!!!");
+            }
+        });
+})
+</script>
+<style>
+.titlec {
+  font-family:Arial, Helvetica, sans-serif;
+  font-size:12px;
+  color:#FFFFFF;
+}
+ul.videos li {
+  float: left;
+  width: 390px;
+  margin-bottom: 1em;
+  background-color:#444444;
+  border:dashed 1px #333333;
+  padding: 5px;
+}
+ul.videos
+{
+  margin-bottom: 1em;
+  padding-left : 0em;
+  margin-left: 0em;
+  list-style: none;
+}
+
+</style>
+</head>
+<body style="background-color:#333333;">
+
+<div id="videoContainer">
+    <div id="playerContainer" style="margin: auto auto; text-align:center; align: center; width: 425px; height: 344px;">
+        <div id="player">
+</div>
+        </div>
+       
+        <div id="videos" style="margin: 20px auto 0 auto; width:425px; ">
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
