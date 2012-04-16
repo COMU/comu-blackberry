@@ -1,0 +1,15 @@
+/*
+Sýte Name: limango
+Site URI: http://www.limango.com.tr
+Version: 3.0
+Author: <a href="http://www.muratkader.net">(c) 2010 Murat Kader</a>
+Author: <a href="http://www.154studios.com">(c) 2010 Gökhan Alap</a>
+CSS Author: <a href="http://www.fdonmez.net">(c) 2010 Fatih Dönmez</a>
+*/
+
+@import url('css/reset.css');
+@import url('css/facebox.css'); 
+@import url('css/index.css');
+@import url('css/jquery.validationEngine.css');
+
+

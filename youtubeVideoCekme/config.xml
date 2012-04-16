@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:rim="http://www.blackberry.com/ns/widgets" version="1.0.0.0">
+  <name>Merhaba BlackBerry</name>
+  <description>BlackBerry</description>
+  <author>Fatmagül Ergani</author>
+  <icon src="images/icon.jpg"/>
+  
+  <content src="deneme.html"/>
+  <feature id="blackberry.app"/>
+</widget>

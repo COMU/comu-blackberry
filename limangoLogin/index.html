@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv=content-type content=text/html;charset=iso-8859-9>
+<meta name="viewport" id="viewport" content="height=device-height,width=device-width,user-scalable=no"/> 
+<script type="text/javascript" src="js/jquery.js"></script> 
+<script>
+function giris(){
+    email = $('#email').val();
+    pass = $('#parola').val();
+    
+    $.ajax({
+      type: "POST",
+      url: "https://www.limango.com.tr/index.php",
+      data: "email="+email+"&password="+pass+"&JSON=true&abschicken=true"
+    }).done(function( msg ) {
+        alert( msg );
+    });
+}
+
+</script>
+<head>
+<body>
+<form action="#" method="post">
+        <img src="images/limango_logo.png"/><br>
+    <figure>
+    <label><h2>ÜYE GİRİŞİ</h2></label>
+
+    <p>
+        <input type="email" name="email" id="email"  placeholder="E-postanız" required/>
+    </p>
+    <p>
+        <input type="password" name="password" id="parola"  placeholder="Parolanız" required />
+    </p>
+    <p>
+        <input type="button" name="oyna" value="oyna" onClick="giris()">
+    </p>
+</figure>
+</form>
+</body>
+</html>

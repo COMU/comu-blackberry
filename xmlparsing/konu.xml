@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8 ?>
+<konu>
+	<konular>
+		<konuadi id="deneme1"> Bir XML dosyasi yaratalim</konuadi>
+		<yazari> Ali Goksel Bektas </yazari>
+		<tarih> 6 Agustos 2011 </tarih>
+	</konular>
+	<konular>
+		<konuadi id="deneme2">XML Nedir?</konuadi>
+		<yazari>Ali Goksel Bektas</yazari>
+		<tarih>6 Agustos 2011</tarih>
+	</konular>
+</konu>

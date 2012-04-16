@@ -1,0 +1,35 @@
+<html>
+<head>
+<style>
+menu {
+    list-style-type:none;
+    background:#F6F6F6;
+    padding:0px;
+    margin:0px;
+}
+menu:before, command:before {
+    display:block;
+    content:attr(label);
+}
+menu[type=toolbar] {
+    position:relative;
+}
+menu[type=toolbar]>menu, menu[type=toolbar]>comman {
+    display:inline-block;
+    position:relative;
+}
+menu[type=toolbar]>menu>menu, menu[type=toolbar]>menu>command {
+    visibility:hidden;
+    display:block;
+    height:0px;
+}
+</style>
+</head>
+<body>
+<menu type="toolbar">
+    <img src="images/ytube.jpg"/>
+</menu>
+<iframe class="youtube-player" type="text/html" width="640" height="385" src="http://www.youtube.com/embed/dP15zlyra3c?html5=1" frameborder="0">
+</iframe>
+</body>
+</html>

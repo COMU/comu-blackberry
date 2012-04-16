@@ -1,0 +1,75 @@
+<html>
+<head>
+<style>
+body{font-family:arial;}
+table{position:absolute;}
+a{text-decoration:none;font:bold}
+a:hover{color:#606060}
+td.menu{background:lightgreen}
+table.topnav{font-size:80%;top:120;left:0}
+table.menu{font-size:100%;bottom:0;z-index:-1}
+</style>
+<script type="text/javascript">
+var i=0
+var c=0
+var intHide
+
+function show_hide_menu()
+{
+if (c==0)
+	{
+	clearInterval(intHide)
+	intShow=setInterval("show()",10)
+	c=1
+	}
+else
+	{
+	clearInterval(intShow)
+	intHide=setInterval("hide()",10)
+	c=0
+	}
+}
+
+function show()
+{
+if (i>-17)
+	{
+	i=i-1
+	document.all("menu").style.bottom=i
+	}
+}
+
+function hide()
+{
+if (i<0)
+	{
+	i=i+1
+	document.all("menu").style.bottom=i
+	}
+}
+</script>
+
+</head>
+<body>
+
+<table class="topnav" width="150">
+
+<tr>
+
+<td  bgcolor="#FF0000" onclick="show_hide_menu()">
+<b>Parolamý unuttum</b><br />
+
+<table class="menu" id="menu" width="100%">
+<tr><td class="menu"><a href="/html/default.asp">HTML</a></td></tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+</p>
+</body>
+</html>
+

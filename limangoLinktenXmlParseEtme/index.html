@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	xmlhttp=new XMLHttpRequest();
+	alert("yeni istek");
+  }
+else
+  {// code for IE6, IE5
+	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+
+xmlhttp.onreadystatechange=function() {
+	alert("okundu");
+	if (xmlhttp.readyState==4) {
+		alert("cevap");
+		console.log("ok");
+		console.log(xmlhttp.status);
+		console.log(xmlhttp.responseText);
+		alert(xmlhttp.responseText);
+	}
+
+}
+xmlhttp.open("POST", "http://fatmagulergani.wordpress.com/feed/", true);
+xmlhttp.send(null);
+
+</script>
+</head>
+<body style="background-color:#005266">
+<div id="baslik">Xml Veriler</div>
+<ul id="liste"></ul>
+</div>
+</body>
+</html>

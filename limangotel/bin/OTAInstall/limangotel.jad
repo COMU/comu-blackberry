@@ -1,0 +1,32 @@
+Manifest-Version: 1.0
+MIDlet-Version: 1.0.0.0
+MIDlet-Jar-Size: 446757
+RIM-COD-URL-5: limangotel-5.cod
+RIM-COD-SHA1-5: 97 3d 61 04 91 c4 e5 b9 48 28 25 59 0b 7f 62 44 59 4d 7e 30
+RIM-COD-URL-4: limangotel-4.cod
+RIM-COD-SHA1-4: b1 12 a1 0b 87 5e 69 97 48 11 75 96 c3 32 4a f4 94 df 68 fb
+RIM-COD-URL-3: limangotel-3.cod
+RIM-COD-SHA1-3: b5 d2 4b 7a 5a e9 77 bc 17 aa 70 7a bd dd e5 40 8d d1 e7 ba
+RIM-COD-URL-2: limangotel-2.cod
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-Jar-URL: limangotel.jar
+RIM-COD-Module-Dependencies: net_rim_cldc,net_rim_bb_web_jse_api,net_rim_xml_org,net_rim_bb_browser_field2_api,net_rim_os,net_rim_networkapi,net_rim_bb_browser_field_api,net_rim_bbapi_push,net_rim_bbapi_messagelist,net_rim_xml,net_rim_bbapi_browser
+RIM-COD-Size-5: 50308
+RIM-COD-SHA1-2: a4 f6 62 58 58 44 72 c0 7a bb ba 3c 46 56 db 60 53 25 f4 47
+RIM-COD-URL-1: limangotel-1.cod
+RIM-COD-Size-4: 48876
+RIM-COD-SHA1-1: 36 6b 64 dd 66 33 ee 0d 64 1f ca 98 69 3f 61 0a 0d 9c 7b ef
+RIM-COD-Size-3: 56292
+RIM-COD-Size-2: 54664
+RIM-MIDlet-Flags-1: 0
+RIM-COD-Size-1: 51308
+RIM-COD-Module-Name: limangotel
+MIDlet-Name: Merhaba BlackBerry
+RIM-COD-Size: 64892
+RIM-COD-Creation-Time: 1328627234
+MIDlet-1: Merhaba BlackBerry,images/icon.png,rim:foreground;WIDGET;
+RIM-COD-URL: limangotel.cod
+MIDlet-Description: BlackBerry için yazd???m?z ilk uygulama
+RIM-COD-SHA1: 05 bb 7b e2 da 4d 2d ff 73 74 a0 d2 e3 bc 8a ec 14 7f aa bf
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Vendor: Fatmagül Ergani
