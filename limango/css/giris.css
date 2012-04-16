@@ -1,0 +1,7 @@
+body{ background-color: #005266; margin: auto }
+
+label { color: white; font-family:Arial, Helvetica, Tahoma }
+
+figure p a { color: white } /* font: bold }*/
+
+#navbar {background: #333; padding: 10px; color: #fff; font-weight: bold}

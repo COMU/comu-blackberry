@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>  
+		<meta http-equiv=content-type content=text/html;charset=utf-8>
+		<meta name="viewport" id="viewport" content="height=device-height,width=device-width,user-scalable=no"/>
+		<link rel="stylesheet" href="css/giris.css" type="text/css" media="screen" /> 
+		<title>girisEkrani</title>
+		<script type= "text/javascript">
+			function giris(){
+				var email = document.getElementById("email");
+				//window.open("https://www.limango.com.tr/index.php");
+				alert("burada kullanici girisi kontrol edilip ona gore ana sayfaya yonlendirilecektir.");
+			}
+		</script>
+	</head>
+	<body>
+		<div id="navbar">LIMANGO</div>
+		<form>
+       			<!--<img src="images/limango_logo.png"/><br>-->
+			<figure>
+				<label><h2>UYE GIRISI</h2></label>
+
+				<p>
+					<input name="email" id="email" type="email" placeholder="E-postaniz" required/>
+				</p>
+				<p>
+					<input name="parola" id="parola" type="password" placeholder="Parolaniz" required />
+				</p>
+				<p>
+					<!--<img src="images/giris.png" onClick="onClick()"/><br>-->
+					<input type="button" value="GIRIS" onclick="giris()"/><br>
+				</p>
+				<nav>
+					<p>
+  						<b><a href="parolamiUnuttum.html">Parolami unuttum</a></b>
+					</p>
+					<p>
+  						<b><a href="uyeOlma.html">Uye olun</a></b>
+					</p>
+				</nav>
+			</figure>
+		</form>
+	</body>
+</html>
