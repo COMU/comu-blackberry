@@ -1,4 +1,4 @@
-﻿	Bu uygulamanın amacı Limango'nun BlackBerry için mobil uygulamasını yapmaktır. Limango dizini içerisinde bulunan dosya ve dizinler hakkında genel bilgi:
+	Bu uygulamanın amacı Limango'nun BlackBerry için mobil uygulamasını yapmaktır. Limango dizini içerisinde bulunan dosya ve dizinler hakkında genel bilgi:
 	config.xml : Bu dosya BlackBerry cihazlarda yapılan dosyanın çalışması için gerekli olan bilgileri içerir.
 	index.html : Bu dosya uygulama ilk çalıştırıldığında gösterilecek olan ekrandır. Kullanıcı bu sayfada daha önce kayıtlı olduğu email ve parolası ile giriş yapıp kendi profiline ulaşacaktır.
 	parolamiUnuttum.html : Bu dosya kullanıcı parolasını unutmuş ise, bu sayfadan email adresine girip parolasını öğrenebilecektir.
