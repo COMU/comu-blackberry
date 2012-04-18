@@ -1,0 +1,92 @@
+body {font: 14px/21px Arial; margin: auto; background-color: #f1f1f1}
+ul, li {padding: 0; margin: 0; list-style: none}
+input, button {padding: 0; margin: 0; background: transparent; border: 0}
+
+/* Navbar */
+#navbar {background: #333; padding: 10px; color: #fff; font-weight: bold}
+
+/* Youtube */
+#youtube {background: #333; padding: 10px; color: #fff; font-weight: bold}
+
+/* Arama Kutusu */
+#aramaKutusu {position: absolute; top: 55px; left: 10px}
+	#aramaKutusu input {background: #fff; padding: 5px; width: 220px; border: 1px solid #ccc; border-radius: 5px}
+	#aramaKutusu button {background: #333; padding: 5px; color: #fff; border-radius: 5px; cursor: pointer}
+	
+/* Sonuçlar */
+#sonuclar {margin-top: 55px; padding-left: 10px}
+.sonuc {background: #fff; padding: 5px; border-bottom: 1px solid #ddd; cursor: pointer}
+
+/* Ana Ekran */
+#ekran {margin-top: 55px; padding-left: 10px}
+.ana {background: #fff; padding: 5px; border-bottom: 1px solid #ddd; cursor: pointer}
+
+/* Oynat */
+#oynat {background: #000; position: fixed; bottom: 0; left: 0; width: 100%; height: 40px; display: none}
+	#oynat span {position: absolute; width: 100%; height: 100%; top:-263px; left: 0}
+/* overflow: hidden
+top:-263px
+*/
+
+#links {
+        margin-top: 3px;
+}
+
+#links ul {
+        list-style: none outside none;
+        width: 200px;
+        display: inline;
+        padding: 0;
+} 
+
+#links li {
+        position: relative;
+        display: inline;
+        margin: 20px;
+}
+
+#links li a { 
+        color: #FFFFFF;
+        display: inline;
+        font: bold 120% Arial, Helvetica, sans-serif;
+        /*padding-bottom: 55px;*/
+        padding-right: 15px;
+        padding-left: 15px;
+        text-decoration: none;
+}
+
+ * html #links li a {  /* make hover effect work in IE */
+    width: 200px;
+}
+
+/*#links li a:hover {
+        border-top: 1px solid #FFFFFF;
+        border-bottom: 5px solid #63A5C9;
+        
+}*/
+
+#links a em { 
+        color: #FFFFFF;
+        font: normal 85% Verdana, Helvetica, sans-serif;
+        line-height: 125%; 
+        display: inline;
+}
+
+#links a span {
+        color: #FFFFFF;
+        font: normal 70% Verdana, Helvetica, sans-serif;
+        line-height: 150%;
+        display: inline;
+}
+#navbar {
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:<length>;
+ }
+@media screen{
+  body>div#navbar{
+   position: fixed;
+  }
+ }
