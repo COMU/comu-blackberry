@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/anaEkran.css" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="css/styles.css" />
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+ 	$(document).ready(function(){
+  		$.ajax({
+   			type: "GET",
+   			dataType: "json",
+   			url: "http://gdata.youtube.com/feeds/api/standardfeeds/most_popular?v=2&alt=json", 
+   			success: function(data){
+    				if(data.feed){
+     					$.each(data.feed.entry, function(i, feed){
+      						var link = feed.content.src;
+      						var url = feed.media$group.media$thumbnail[1].url;
+      						var baslik = feed.title.$t;
+      						$("#body").append('<div id="carbonForm"><div class="formRow" onclick="$.oynat(\''+link+'\')"><img src='+url+' height=\'60\' widht=\'60\'>'+baslik+'</div></div>');
+      					});
+     				}
+    			}
+  		});
+ 	});
+                        
+ 	$(function(){
+  		$("button#ara").click(function(){
+   			var deger = $("input[name=kelime]").val();
+   				deger = $.trim(deger);
+   				if (deger != ''){
+    					$("#sonuclar").empty();
+   					$.ajax({
+     						type: "GET",
+     						dataType: "json",
+     						url: "http://gdata.youtube.com/feeds/api/videos?q="+deger+"&format=5&max-result=50&v=2&alt=jsonc",
+     						success: function(sonuc){
+      							if(sonuc.data.items){
+       								$.each(sonuc.data.items, function(i, data){
+								        var id = data.id;
+        								var baslik = data.title;
+        								$("#sonuclar").append('<div class="sonuc" onclick="$.youtube(\''+id+'\')"><br><span>'+baslik+'</span><br></div>');
+        							});
+       							}
+       							else{
+        							$("sonuclar").html("Herhangi bir sonuç bulunamadı.");
+       							}
+      						}
+     					});
+    				}
+  		});
+  		$.youtube = function(id){
+   			$("#oynat").fadeIn().find("span").html('<iframe width="100%" height="300" src="http://www.youtube.com/embed/'+id+'?autoplay=1" frameborder="0"></iframe>');
+  		}
+  
+		$.oynat = function(link){
+   			$("#oynat").fadeIn().find("span").html('<iframe width="100%" height="300" src=\''+link+'\' frameborder="0"></iframe>');
+  		}
+	});
+
+</script>
+</head>
+
+<body id="body">
+	<div class="formRow">
+                <input type="text" name="videoAra" id="videoAra" placeholder="Youtube'da Ara"/>
+        	<input type="button" name="ara" id="ara" value="Ara" />
+	</div>
+
+<!--<div id="carbonForm">
+        <div class="formRow">
+                <label>Çekilen bilgiler buraya yazılacak.</label>
+        </div>
+</div>-->
+<div id="navbar">
+        <div id="links">
+                <ul>
+                        <li><a href="#">Kampanyalar</a></li>
+                        <li><a href="#">Hesabim</a></li>
+                        <li><a href="#">Sepetim</a></li>
+                        <li><a href="#">Yardim</a></li>
+                </ul>
+        </div>
+</div>
+</body>
+</html>

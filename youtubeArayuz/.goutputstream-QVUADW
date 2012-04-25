@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" id="viewport" content="height=device-height,width=device-width,user-scalable=no"/>
+<link rel="stylesheet" href="css/giris.css" type="text/css"/>
+<title>Üye olma</title>
+<script type= "text/javascript">
+        function gonder(){
+                var email = document.getElementById("email");
+                alert("burada kullanicinin uye kaydi yapilacaktir.");
+        }
+</script>
+</head>
+<body>
+<div id="carbonForm">
+        <h2>Üye Kayd
