@@ -1,0 +1,286 @@
+*{
+	/* Resetting the default styles of the page */
+	margin:0;
+	padding:0;
+}
+
+html{
+	overflow:auto;
+}
+
+body{
+	/* Setting default text color, background and a font stack */
+	font-size:0.825em;
+	color:#eee;
+	background:url("img/bg.png") repeat-x #222222;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+#carbonForm{
+	/* The main form container */
+	background-color:#1C1C1C;
+	border:1px solid #080808;
+	margin:20px;
+	padding:20px;
+	width:500px;
+	
+	-moz-box-shadow:0 0 1px #444 inset;
+	-webkit-box-shadow:0 0 1px #444 inset;
+	box-shadow:0 0 1px #444 inset;
+}
+
+#carbonForm h1{
+	/* The form heading */
+	font-family:Century Gothic,Myriad Pro,Arial,Helvetica,sans-serif;
+	font-size:60px;
+	font-weight:normal;
+	padding:0 0 30px 10px;
+	text-align:left;
+	color: #36A5C1;
+}
+
+#carbonForm h2{
+        /* The form heading */
+        font-family:Century Gothic,Myriad Pro,Arial,Helvetica,sans-serif;
+        font-size:30px;
+        font-weight:normal;
+        padding:0 0 30px 10px;
+        text-align:left;
+        color: #36A5C1;
+}
+
+.fieldContainer{
+	/* The light rounded section, which contans the fields */
+	background-color:#1E1E1E;
+	border:1px solid #0E0E0E;
+	padding:30px 10px;
+	
+	/* CSS3 box shadow, used as an inner glow */
+	-moz-box-shadow:0 0 20px #292929 inset;
+	-webkit-box-shadow:0 0 20px #292929 inset;
+	box-shadow:0 0 20px #292929 inset;
+}
+
+#carbonForm,.fieldContainer,.errorTip{
+	/* Rounding the divs at once */
+	-moz-border-radius:12px;
+	-webkit-border-radius:12px;
+	border-radius:12px;
+}
+
+
+.formRow{
+	height:35px;
+	padding:10px;
+	position:relative;
+}
+
+.label{
+	float:left;
+	padding:0 20px 0 0;
+	text-align:right;
+	width:70px;
+}
+
+label{
+	font-family:Century Gothic,Myriad Pro,Arial,Helvetica,sans-serif;
+	font-size:11px;
+	letter-spacing:1px;
+	line-height:35px;
+}
+
+.field{
+	float:left;
+}
+
+.field input{
+	/* The text boxes */
+	border:1px solid white;
+	color:#666666;
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:22px;
+	padding:4px 5px;
+	background:url("img/box_bg.png") repeat-x scroll left top #FFFFFF;
+	outline:none; /* Preventing the default Safari and Chrome text box highlight */
+}
+
+input:hover,
+input:focus{
+	-moz-box-shadow:0 0 8px lightblue;
+	-webkit-box-shadow:0 0 8px lightblue;
+	box-shadow:0 0 8px lightblue;
+}
+
+#footer{
+        cursor:pointer;
+        height:40px;
+        text-transform:uppercase;
+        width:300px;
+}
+
+a, a:visited {
+	color:#0196e3;
+	text-decoration:none;
+	outline:none;
+}
+
+a:hover{
+	text-decoration:underline;
+}
+
+a img{
+	border:none;
+}
+
+#navbar {background: #1C1C1C; padding: 10px; color: #fff; font-weight: bold}
+
+#links {
+        margin-top: 3px;
+}
+
+#links ul {
+        list-style: none outside none;
+        width: 200px;
+        display: inline;
+        padding: 0;
+}
+
+#links li {
+        position: relative;
+        display: inline;
+        margin: 20px;
+}
+
+#links li a {
+        color: #FFFFFF;
+        display: inline;
+        font: 100% Arial, Helvetica, sans-serif;
+        /*padding-bottom: 55px;*/
+        padding-right: 15px;
+        padding-left: 15px;
+        text-decoration: none;
+}
+ * html #links li a {  /* make hover effect work in IE */
+    width: 200px;
+}
+
+#links a em {
+        color: #FFFFFF;
+        font: normal 85% Verdana, Helvetica, sans-serif;
+        line-height: 125%;
+        display: inline;
+}
+
+#links a span {
+        color: #FFFFFF;
+        font: normal 70% Verdana, Helvetica, sans-serif;
+        line-height: 150%;
+        display: inline;
+}
+#navbar {
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:<length>;
+ }
+@media screen{
+  body>div#navbar{
+   position: fixed;
+  }
+}
+
+#ara {
+ padding: 0;
+ margin: 0;
+ background: #1C1C1C;
+ border: 0;
+ color: #ffffff;
+ width:110px;
+ height:30px;
+ border:1px solid black;
+}
+
+
+ul#tabs {
+        height: 36px;
+        padding: 20px 20px 0 30px;
+        width: 904px;
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+
+}
+
+ul#tabs li {
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        border-radius: 6px;
+        float: left;
+        width: 168px;
+        margin: 0 10px 0 0;
+        background-color: #1C1C1C;
+        border: solid 1px #1C1C1C;  /*tabların etrafi*/
+        position: relative;
+        z-index: 1;
+}
+ul#tabs li.selected {
+        z-index: 3;
+}
+
+ul#tabs li.shadow {
+        width: 100%;
+        height: 2px;
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        border: none;
+        background: none;
+        z-index: 2;
+        -webkit-box-shadow: #111 0 -2px 6px;
+        -moz-box-shadow: #111 0 -2px 6px;
+        box-shadow: #111 0 -2px 6px;
+}
+ul#tabs li a:link, ul#tabs li a:visited {
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        border-radius: 6px;
+        display: block;
+        text-align: center;
+        width: 168px;
+        height: 40px;
+        line-height: 36px;
+        font-family: Arial, Helvetica, sans-serif;
+        text-transform: uppercase;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: bold;
+        color: #fff; /*icindeki yazi*/
+        letter-spacing: 1px;
+        outline: none;
+        float: left;
+        background: #1C1C1C; /*secilmemis olan tablarin arkasi*/
+        -webkit-transition: background-color 0.3s linear;
+        -moz-transition: background-color 0.3s linear;
+	-o-transition: background-color 0.3s linear;
+}
+
+ul#tabs li a:hover {
+        background-color: #1C1C1C;
+}
+
+ul#tabs li.selected a:link, ul#tabs li.selected a:visited {
+        color: #1C1C1C;
+        border: solid 1px #fff;
+        -webkit-transition: background-color 0.2s linear;
+        background: -moz-linear-gradient(top center, #d1d1d1, #f2f2f2 80%) repeat scroll 0 0 #f2f2f2;
+        background: -webkit-gradient(linear,left bottom,left top,color-stop(.2, #f2f2f2),color-stop(.8, #d1d1d1));
+        background-color: #1C1C1C;
+}
+#content {
+        width: 910px;
+        background: #1C1C1C;
+        padding: 0 0 50px 0;
+        margin: 0 auto;
+}
+
