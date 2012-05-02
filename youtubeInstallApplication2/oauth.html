@@ -1,0 +1,17 @@
+<html>
+<head>
+<script type="text/javascript" src="jquery.js"></script>
+<script text="text/javascript">
+
+function giris(){
+	mywindow = window.open("https://accounts.google.com/o/oauth2/auth?client_id=821909445886-q4rk5f41ecvcv0bvvq3unuvh41d362p1.apps.googleusercontent.com&redirect_uri=http://localhost/oauth2callback&scope=https://gdata.youtube.com&response_type=code&access_type=offline", "mywindows", "location=yes");
+	if (mywindow.focus) {
+		alert(window.name);
+	}
+}
+</script>
+</head>
+<body>
+<input type="button" id="giris" value="Youtube Giris" onClick="giris()"</input>
+</body>
+</html>
