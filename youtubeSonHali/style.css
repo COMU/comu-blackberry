@@ -1,0 +1,256 @@
+*{
+        /* Resetting the default styles of the page */
+        margin:0;
+        padding:0;
+}
+
+html{
+        overflow:auto;
+}
+
+body {
+	font: 14px/21px Arial; 
+	margin: auto; 
+	background-color: #f1f1f1
+}
+
+ul, li {
+	padding: 0; 
+	margin: 0; 
+	list-style: none
+}
+
+input, button {
+	padding: 0; 
+	margin: 0; 
+	background: transparent; 
+	border: 0
+}
+
+/* Navbar */
+#navbar {
+	background: #333; 
+	padding: 10px; 
+	color: #fff; 
+	font-weight: bold
+}
+
+/* Youtube */
+#youtube {
+	background: #333; 
+	padding: 10px; 
+	color: #fff; 
+	font-weight: bold
+}
+
+/* Arama Kutusu */
+#aramaKutusu {
+	position: absolute; 
+	top: 55px; 
+	left: 10px
+}
+
+#aramaKutusu input {
+	background: #fff; 
+	padding: 5px; 
+	width: 220px; 
+	border: 1px solid #ccc; 
+	border-radius: 5px
+}
+	
+#aramaKutusu button {
+	background: #333; 
+	padding: 5px; 
+	color: #fff; 
+	border-radius: 5px; 
+	cursor: pointer
+}
+	
+/* Sonuçlar */
+#sonuclar {
+	margin-top: 55px; 
+	padding-left: 10px
+}
+.sonuc {
+	background: #fff; 
+	padding: 5px; 
+	border-bottom: 1px solid #ddd; 
+	cursor: pointer
+}
+
+/* Ana Ekran */
+#ekran {
+	margin-top: 55px; 
+	padding-left: 10px
+}
+.ana {
+	background: #fff; 
+	padding: 5px; 
+	border-bottom: 1px solid #ddd; 
+	cursor: pointer
+}
+
+/* Oynat */
+#oynat {
+	background: #000; 
+	position: fixed; 
+	bottom: 0; 
+	left: 0; 
+	width: 100%; 
+	height: 40px; 
+	display: none
+}
+
+#oynat span {
+	position: absolute; 
+	width: 100%; 
+	height: 100%; 
+	top:-263px; 
+	left: 0
+}
+
+/* overflow: hidden
+top:-263px
+*/
+
+#links {
+        margin-top: 3px;
+}
+
+#links ul {
+        list-style: none outside none;
+        width: 200px;
+        display: inline;
+        padding: 0;
+} 
+
+#links li {
+        position: relative;
+        display: inline;
+        margin: 20px;
+}
+
+#links li a { 
+        color: #FFFFFF;
+        display: inline;
+        font: bold 120% Arial, Helvetica, sans-serif;
+        /*padding-bottom: 55px;*/
+        padding-right: 15px;
+        padding-left: 15px;
+        text-decoration: none;
+}
+
+ * html #links li a {  /* make hover effect work in IE */
+    width: 200px;
+}
+
+/*#links li a:hover {
+        border-top: 1px solid #FFFFFF;
+        border-bottom: 5px solid #63A5C9;
+        
+}*/
+
+#links a em { 
+        color: #FFFFFF;
+        font: normal 85% Verdana, Helvetica, sans-serif;
+        line-height: 125%; 
+        display: inline;
+}
+
+#links a span {
+        color: #FFFFFF;
+        font: normal 70% Verdana, Helvetica, sans-serif;
+        line-height: 150%;
+        display: inline;
+}
+#navbar {
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:<length>;
+ }
+@media screen{
+  body>div#navbar{
+   position: fixed;
+  }
+ }
+
+
+
+ul#tabs {
+        height: 36px;
+        padding: 20px 20px 0 30px;
+        width: 904px;
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+
+}
+
+ul#tabs li {
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        border-radius: 6px;
+        float: left;
+        width: 168px;
+        margin: 0 10px 0 0;
+        background-color: #1C1C1C;
+        border: solid 1px #1C1C1C;  /*tabların etrafi*/
+        position: relative;
+        z-index: 1;
+}
+ul#tabs li.selected {
+        z-index: 3;
+}
+
+ul#tabs li.shadow {
+        width: 100%;
+        height: 2px;
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        border: none;
+        background: none;
+        z-index: 2;
+        -webkit-box-shadow: #111 0 -2px 6px;
+        -moz-box-shadow: #111 0 -2px 6px;
+        box-shadow: #111 0 -2px 6px;
+}
+
+ul#tabs li a:link, ul#tabs li a:visited {
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        border-radius: 6px;
+        display: block;
+        text-align: center;
+        width: 168px;
+        height: 40px;
+        line-height: 36px;
+        font-family: Arial, Helvetica, sans-serif;
+        text-transform: uppercase;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: bold;
+        color: #fff; /*icindeki yazi*/
+        letter-spacing: 1px;
+        outline: none;
+        float: left;
+        background: #1C1C1C; /*secilmemis olan tablarin arkasi*/
+        -webkit-transition: background-color 0.3s linear;
+        -moz-transition: background-color 0.3s linear;
+        -o-transition: background-color 0.3s linear;
+}
+
+ul#tabs li a:hover {
+        background-color: #1C1C1C;
+}
+
+ul#tabs li.selected a:link, ul#tabs li.selected a:visited {
+        color: #1C1C1C;
+        border: solid 1px #fff;
+        -webkit-transition: background-color 0.2s linear;
+        background: -moz-linear-gradient(top center, #d1d1d1, #f2f2f2 80%) repeat scroll 0 0 #f2f2f2;
+        background: -webkit-gradient(linear,left bottom,left top,color-stop(.2, #f2f2f2),color-stop(.8, #d1d1d1));
+        background-color: #1C1C1C;
+}
