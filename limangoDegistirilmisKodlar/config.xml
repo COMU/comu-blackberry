@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets"
+        xmlns:rim="http://www.blackberry.com/ns/widgets"
+        version="2.0"
+        rim:header="RIM-Widget: rim/widget">
+
+  <author href="http://www.artistanbulpr.com/" rim:copyright="Copyright 2012 Artistanbul">Artistanbul</author>
+
+  <rim:navigation mode="focus" />
+
+  <name>Limango</name>
+
+  <description>
+    App of the limango private shopping site.
+  </description>
+
+  <rim:orientation mode="auto"/>
+
+  <rim:loadingScreen backgroundImage="background.png"
+                     foregroundImage="foreground.gif"
+                     onLocalPageLoad="true">
+    <rim:transitionEffect type="zoomIn" />
+  </rim:loadingScreen>
+
+  <icon src="images/icon.png"/>
+  <icon src="images/icon_hover.png" rim:hover="true"/>
+
+		<rim:cache maxCacheSizeTotal="2048" maxCacheSizeItem ="256" />
+
+  <content src="index.html" >
+    <rim:background src="listener.html" runOnStartup="true" />
+  </content>
+
+  <feature id="blackberry.ui.dialog"/>
+
+  <access uri="http://limango.com" subdomains="true">
+	<feature id="blackberry.app.event" required="true" version="1.0.0"/>
+	<feature id="blackberry.invoke" required="true" version="1.0.0"/>
+  </access>
+
+  <rim:connection timeout="25000">
+    <id>TCP_WIFI</id>
+    <id>MDS</id>
+    <id>BIS-B</id>
+    <id>TCP_CELLULAR</id>
+    <id>WAP2</id>
+    <id>WAP</id>
+  </rim:connection>
+
+  <license>
+    Example license
+    Copyright (c) 2012 Artistanbul.
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+    BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+    ACTION OF CONTRACT, INSULT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+  </license>
+
+</widget>

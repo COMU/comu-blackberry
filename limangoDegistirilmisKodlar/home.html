@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>Limango</title> 
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" href="jquery.mobile-1.1.0.min.css" />
+	<script src="jquery-1.7.2.min.js"></script>
+	<script src="jquery.mobile-1.1.0.min.js"></script>
+	
+</head> 
+<body> 
+<!-- Start of first page -->
+<div data-role="page" id="home">
+<!-- data-role -->
+	<div data-role="header" class="header">
+	<img src="images/limango_v5.png" class="logo" />
+	<!-- data-theme temayı ayarlar. -->
+	<!-- data-role yapılacak işe göre seçilen kısım. Buna göre de event metodlar değişiyor. -->
+	<ul data-role="listview" data-theme="a">
+	<!-- data-ajax="false" -->
+	<!-- data-transition -->
+	<li><a href="home.html" data-ajax="false" data-transition="slide">Home</a></li>
+	<li><a href="products.html" data-ajax="false" data-transition="slide">Ürünler</a></li>
+	<li><a href="campaigns.html" data-ajax="false" data-transition="slide">Kampanyalar</a></li>
+</ul>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+		<p>
+		Burası login sonrası home
+		</p>	
+	</div><!-- /content -->
+	</div><!-- /page -->
+</body>
+</html>

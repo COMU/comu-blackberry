@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>Limango</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" href="jquery.mobile-1.1.0.min.css" />
+	<script src="jquery-1.7.2.min.js"></script>
+	<script src="jquery.mobile-1.1.0.min.js"></script>
+	<script>
+		$(document).ready(function()
+		{
+		  $.ajax({
+			type: "GET",
+			url: "sample.xml",
+			dataType: "xml",
+			success: parseXml
+		  });
+		});
+
+		function parseXml(xml)
+		{
+		  $(xml).find("book").each(function()
+		{
+			var numRand = Math.floor(Math.random()*101);
+			$("#productlist,#campaignlist").append("<li data-corners=\"false\" data-shadow=\"false\" data-iconshadow=\"true\" data-wrapperels=\"div\" data-icon=\"false\" data-iconpos=\"right\" data-theme=\"c\"><div class=\"ui-btn-inner ui-li ui-li-has-alt\"><div class=\"ui-btn-text\"><a href=\"index.html\" class=\"ui-link-inherit\"><img class=\"ui-li-thumb\" src=\""+ $(this).find("image").text() + "\"><h3 class=\"ui-li-heading\">" + $(this).find("author").text() + "</h3><p class=\"ui-li-desc\">" +$(this).find("genre").text()+ "</p></a></div></div><a data-transition=\"slideup\" data-rel=\"dialog\" href=\"index.html\" title=\"Ürünü Satın Al\"  class=\"ui-li-link-alt ui-btn ui-btn-up-c\" data-corners=\"false\" data-shadow=\"false\" data-iconshadow=\"true\" data-wrapperels=\"span\" data-icon=\"false\" data-iconpos=\"false\" data-theme=\"c\" style=\"border-left-width: 1px; padding-left: 5px; width: 20px; padding-bottom: 3px; \"><span class=\"ui-btn-inner\"><span data-corners=\"true\" data-shadow=\"true\" data-iconshadow=\"true\" data-wrapperels=\"span\" data-icon=\"gear\" data-iconpos=\"notext\" data-theme=\"d\" title=\"\" class=\"ui-btn ui-btn-up-d ui-shadow ui-btn-corner-all ui-btn-icon-notext\"><span class=\"ui-btn-inner ui-btn-corner-all\"><span class=\"ui-icon ui-icon-gear ui-icon-shadow\">"+numRand+"</span></span></span></span></a></li>");
+
+		});
+	}
+	</script>
+</head> 
+<body> 
+<!-- Start of first page -->
+<div data-role="page" id="home">
+
+	<div data-role="header" class="header">
+	<img src="images/limango_v5.png" class="logo" />
+	<ul data-role="listview" data-theme="a">
+	<li><a href="#home" data-transition="slide">Home</a></li>
+	<li><a href="#products" data-transition="slide">Ürünler</a></li>
+	<li><a href="#campaigns" data-transition="slide">Kampanyalar</a></li>
+</ul>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+		<p>
+		Burası login sonrası home
+		</p>	
+	</div><!-- /content -->
+	</div><!-- /page -->
+	
+<!-- Start of products page -->
+<div data-role="page" id="products">
+
+	<div data-role="header" class="header">
+	<img src="images/limango_v5.png" class="logo" />
+	<ul data-role="listview" data-theme="a">
+	<li><a href="#home" data-transition="slide">Home</a></li>
+	<li><a href="#products" data-transition="slide">Ürünler</a></li>
+	<li><a href="#campaigns" data-transition="slide">Kampanyalar</a></li>
+</ul>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+		<ul data-role="listview" data-split-icon="gear" data-split-theme="d" id="productlist">
+			<!-- this place is getting filled with jquery, via sample.xml -->
+		</ul>
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+<!-- Start of campaigns page -->
+<div data-role="page" id="campaigns">
+
+	<div data-role="header" class="header">
+	<img src="images/limango_v5.png" class="logo" />
+	<ul data-role="listview" data-theme="a">
+	<li><a href="#home" data-transition="slide">Home</a></li>
+	<li><a href="#products" data-transition="slide">Ürünler</a></li>
+	<li><a href="#campaigns" data-transition="slide">Kampanyalar</a></li>
+</ul>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+		<ul data-role="listview" data-split-icon="gear" data-split-theme="d" id="campaignlist">
+			<!-- this place is getting filled with jquery, via sample.xml -->
+		</ul>
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+
+</body>
+</html>
