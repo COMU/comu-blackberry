@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>Limango</title> 
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" href="jquery.mobile-1.1.0.min.css" />
+	<script src="jquery-1.7.2.min.js"></script>
+	<script src="jquery.mobile-1.1.0.min.js"></script>
+</head> 
+<body> 
+	<!-- Start of first page -->
+	<div data-role="page" id="login">
+		<div data-role="header">
+			<img src="images/limango_v5.png" class="logo" />
+		</div><!-- /header -->
+
+		<div data-role="content">	
+			<p>
+				<form action="home.html" method="post">
+					<label for="username" class="ui-hidden-accessible">Kullanıcı Adınız:</label>
+					<input type="text" name="username" id="username" value="" placeholder="Kullanıcı Adınız"/>
+					<label for="password" class="ui-hidden-accessible">Parolanız:</label>
+					<input type="text" name="password" id="password" value="" placeholder="Parolanız"/>
+					<label for="submit" class="ui-hidden-accessible">Gönder:</label>
+					<input type="submit" name="submit" id="submit" value="Gönder" />
+				</form>
+			</p>	
+		</div><!-- /content -->
+	</div><!-- /page -->
+</body>
+</html>
