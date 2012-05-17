@@ -1,0 +1,11 @@
+﻿.logo{
+display: block;
+margin: 0 auto;
+padding: 10px;
+}
+.center-wrapper{
+text-align: center;
+}
+.center-wrapper * {
+margin: 0 auto;
+}
