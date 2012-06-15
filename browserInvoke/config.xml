@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets"
+        xmlns:rim="http://www.blackberry.com/ns/widgets"
+        version="2.0"
+        rim:header="RIM-Widget: rim/widget">
+
+  <author href="http://www.fatmagulergani.blogspot.com" rim:copyright="Copyright 2012 Comu">Comu</author>
+
+  <rim:navigation mode="focus" />
+
+  <name>Youtube</name>
+
+  <description>
+    App of the youtube public watching videos site.
+  </description>
+
+  <rim:orientation mode="auto"/>
+
+  <icon src="icon.jpg"/>
+
+		<rim:cache maxCacheSizeTotal="2048" maxCacheSizeItem ="256" />
+
+  <content src="sayfa.html" >
+    <rim:background src="listener.html" runOnStartup="true" />
+  </content>
+
+  <feature id="blackberry.ui.dialog"/>
+  <feature id="blackberry.ui.menu" />
+  <feature id="blackberry.invoke" /> 
+  <feature id="blackberry.invoke.BrowserArguments" />
+  <feature id="blackberry.identity" />  
+
+  <access uri="http://www.youtube.com" subdomains="true">
+	<feature id="blackberry.app.event" required="true" version="1.0.0"/>
+	<feature id="blackberry.invoke" required="true" version="1.0.0"/>
+  </access>
+
+  <rim:connection timeout="25000">
+    <id>TCP_WIFI</id>
+    <id>MDS</id>
+    <id>BIS-B</id>
+    <id>TCP_CELLULAR</id>
+    <id>WAP2</id>
+    <id>WAP</id>
+  </rim:connection>
+
+  <license>
+    Example license
+    Copyright (c) 2012 Comu.
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+    BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+    ACTION OF CONTRACT, INSULT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+  </license>
+
+</widget>

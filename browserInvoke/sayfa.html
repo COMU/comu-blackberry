@@ -1,0 +1,29 @@
+<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>My Videos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<script type="text/javascript" src="swfobject.js"></script>
+<link rel="stylesheet" href="jquery.mobile-1.1.0.min.css" />
+<script src="jquery-1.7.2.min.js"></script>
+<script src="jquery.mobile-1.1.0.min.js"></script>
+<script type="text/javascript">
+var link = "http://www.youtube.com/embed/PSAdbWD85kg";
+var title = "baslik kismi";
+var desc = "tanimlama kismi";
+var html = '<a href="" onclick="javascript&colon; openBrowser('+link+');" ><div id="container"><h3>'+title+'</h3><h4>'+desc+' </h4></div></a>';
+function openBrowser(url) {
+  var args = new blackberry.invoke.BrowserArguments('http://www.blackberry.com');
+  blackberry.invoke.invoke(blackberry.invoke.APP_BROWSER, args);
+}
+</script>
+
+</head>
+<body>
+
+<!--<iframe id="youtube-player" type="text/html" width="640" height="390"
+  src="http://www.youtube.com/embed/PSAdbWD85kg"
+  frameborder="0">-->
+</body>
+</html>

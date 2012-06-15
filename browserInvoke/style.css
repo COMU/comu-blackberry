@@ -1,0 +1,48 @@
+body {
+background-color: #E6E6E6;
+margin: 0 auto;
+padding: 0;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 75%;
+line-height: 100%;
+}
+#surgulu-panel {
+height: 185px;
+width: 350px;
+display: none;
+border-right-width: 2px;
+border-left-width: 2px;
+border-right-style: solid;
+border-left-style: solid;
+border-right-color: #626262;
+border-left-color: #626262;
+background-color: #949494;
+border-bottom-width: 2px;
+border-bottom-style: solid;
+border-bottom-color: #626262;
+opacity: .8;
+margin: left;
+}
+
+.surgu {
+margin: 0;
+padding: 0;
+background-image: url(img/slide_button.png);
+background-repeat: no-repeat;
+background-position: left top;
+}
+
+.btn-surgu {
+text-align: center;
+width: 191px;
+height: 26px;
+display: block;
+text-decoration: none;
+font-family: Arial, Helvetica, sans-serif;
+font-weight: bold;
+color: #fff;
+font-size: 1em;
+margin-right: auto;
+margin-left: left;
+line-height: 22px;
+}
