@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>YouTube</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<script type="text/javascript" src="js/swfobject.js"></script>
+<link rel="stylesheet" href="css/jquery.mobile-1.1.0.min.css" />
+<script src="js/jquery-1.7.2.min.js"></script>
+<script src="js/jquery.mobile-1.1.0.min.js"></script>
+<!--<link rel="stylesheet" type="text/css" href="css/styles.css" />-->
+
+<script type="text/javascript">
+
+function item1Click() {
+    alert("tamam");
+  }
+function item2Click() {
+    alert("tamam");
+  }
+function item3Click() {
+    alert("tamam");
+  }
+function item4Click() {
+    alert("tamam");
+  }
+
+  var item1 = new blackberry.ui.menu.MenuItem(false, 1, "Ana Sayfa", item1Click);
+  blackberry.ui.menu.addMenuItem(item1);
+  var item2 = new blackberry.ui.menu.MenuItem(false, 1, "Ara", item2Click);
+  blackberry.ui.menu.addMenuItem(item2);
+  var item3 = new blackberry.ui.menu.MenuItem(false, 1, "Ayarlar", item3Click);
+  blackberry.ui.menu.addMenuItem(item3);
+  var item4 = new blackberry.ui.menu.MenuItem(false, 1, "Cikis",  item4Click);
+  blackberry.ui.menu.addMenuItem(item4);
+
+ 	$(document).ready(function(){
+  		$.ajax({
+   			type: "GET",
+   			dataType: "jsonp",
+   			url: "http://gdata.youtube.com/feeds/api/standardfeeds/most_popular?time=today&alt=json-in-script&format=5", 
+   			success: function(data){
+    				if(data.feed){
+     					$.each(data.feed.entry, function(i, feed){
+      						var title = feed.title.$t;
+      						var thumbnail = feed.media$group.media$thumbnail[0].url;
+							var playerUrl = feed.media$group.media$content[0].url;
+							var videoId = playerUrl.substr(playerUrl.indexOf('v/')+2, 11);
+							playerUrl = "http://www.youtube.com/embed/" + videoId;
+      						$("#carbonForm").append('<div class="formRow" onclick="$.oynat(\''+playerUrl+'\')"><img src='+thumbnail+' height=\'60\' widht=\'60\'>'+title+'</div>');
+      					});
+     				}
+    			}
+  		});
+ 	});
+                        
+ 	$(function(){
+  		$("button#ara").click(function(){
+   			var deger = $("input[name=kelime]").val();
+   			deger = $.trim(deger);
+   				if (deger != ''){
+    					$("#sonuclar").empty();
+   					$.ajax({
+     						type: "GET",
+     						dataType: "json",
+     						url: "http://gdata.youtube.com/feeds/api/videos?q="+deger+"&format=5&max-result=50&v=2&alt=jsonc",
+     						success: function(sonuc){
+      							if(sonuc.data.items){
+       								$.each(sonuc.data.items, function(i, data){
+								        var id = data.id;
+        								var baslik = data.title;
+        								$("#sonuclar").append('<div class="sonuc" onclick="$.youtube(\''+id+'\')"><br><span>'+baslik+'</span><br></div>');
+        							});
+       							}
+       							else{
+        							$("sonuclar").html("Herhangi bir sonuç bulunamadı.");
+       							}
+      						}
+     					});
+    			}
+		});
+	
+  		$.youtube = function(id){
+			var url = "http://www.youtube.com/embed/"+id+"?autoplay=1";
+			var args = new blackberry.invoke.BrowserArguments(url);
+			blackberry.invoke.invoke(blackberry.invoke.APP_BROWSER, args);
+   			//$("#oynat").fadeIn().find("span").html('<iframe width="100%" height="300" src="http://www.youtube.com/embed/'+id+'?autoplay=1" frameborder="0"></iframe>');
+  		}
+  
+		$.oynat = function(playerUrl){
+			var args = new blackberry.invoke.BrowserArguments(playerUrl);
+			blackberry.invoke.invoke(blackberry.invoke.APP_BROWSER, args);
+   			//$("#oynat").fadeIn().find("span").html('<iframe width="100%" height="300" src=\''+link+'\' frameborder="0"></iframe>');
+  		}
+	});
+</script>
+</head>
+
+<body id="body">
+	<div class="formRow">
+                <input type="text" name="videoAra" id="videoAra" placeholder="Youtube'da Ara"/>
+				<input type="button" name="ara" id="ara" value="Ara"/>
+	</div>
+
+<div id="carbonForm">
+        
+</div>
+</body>
+</html>
